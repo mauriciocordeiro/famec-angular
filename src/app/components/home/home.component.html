@@ -1,1 +1,14 @@
-<p>home works!</p>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span fxFlex>
+            <button mat-icon-button matTooltip="Menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </span>
+        <span fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10">
+            <button mat-icon-button matTooltip="Sair" (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon>
+            </button>
+        </span>
+    </mat-toolbar-row>
+</mat-toolbar>
