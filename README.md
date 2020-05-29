@@ -1,4 +1,4 @@
-# famec-angular
+# FAMEC Angular
 
 ![CI](https://github.com/mauriciocordeiro/famec-angular/workflows/CI/badge.svg)
 
