@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  links = ["a", "b"];
 
   constructor(private authService: AuthService, private router: Router) { }
 

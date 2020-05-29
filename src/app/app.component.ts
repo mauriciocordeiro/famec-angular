@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AppComponent {
   title = 'famec-angular';
 
-  usuario : Usuario = {
+  usuario: Usuario = {
     nmLogin: '',
     nmUsuario: ''
   };
