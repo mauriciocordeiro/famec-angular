@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { environment as env } from './../../../environments/environment';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +23,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted = false;
 
+  isProdMode = false;
+
   ngOnInit(): void {
     if(this.authService.isLoggedIn())
       this.router.navigateByUrl('/home');
@@ -28,7 +32,9 @@ export class LoginComponent implements OnInit {
     this.loginForm = new FormGroup({
       usuario: new FormControl('', [Validators.required]),
       senha: new FormControl('', [Validators.required])
-    })
+    });
+
+    this.isProdMode = env.production;
   }
 
   login() {
@@ -60,6 +66,15 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+  }
+
+  init() {
+    this.authService.init()
+      .subscribe(response => {
+        this.snackBar.open("API inicializada.", response.status, { duration: 1500 });
+      }, error => {
+        this.snackBar.open("Erro ao inicializar a API.", error.status, { duration: 1500 });
+      })
   }
 
 }

@@ -24,4 +24,8 @@ export class AuthService {
     localStorage.removeItem('ACCESS_TOKEN');
   }
 
+  public init() {
+    return this.http.post<any>(ENDPOINT+'/init', {});
+  }
+
 }
