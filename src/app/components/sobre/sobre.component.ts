@@ -12,4 +12,11 @@ export class SobreComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openSite(about) {
+    if(about == 'famec')
+      window.open('http://www.famec.org.br/', '_blank');
+    else if(about == 'dev')
+      window.open('https://github.com/mauriciocordeiro/famec-angular', '_blank');
+  }
+
 }

@@ -1,1 +1,39 @@
-<p>sobre works!</p>
+<div fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+
+    <mat-card class="card">
+        <mat-card-header>
+            <div mat-card-avatar class="header-image-famec"></div>
+            <mat-card-title>A FAMEC</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Fundação de Assistência e Desenvolvimento Humano para Crianças, Adolescentes e seus Familiares de
+                Vitória da Conquista - BA
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="openSite('famec')">SAIBA MAIS</button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="card">
+        <mat-card-header>
+            <div mat-card-avatar>
+                <mat-icon>code</mat-icon>
+            </div>
+            <mat-card-title>O App</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                App <i>open-source</i> para manutenção de registros dos educandos da FAMEC.
+            </p>
+            <p>
+                Desenvolvido por <a href="https://mauriciocordeiro.github.io/cv/">Maurício Cordeiro</a>.
+            </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="openSite('dev')">SAIBA MAIS</button>
+        </mat-card-actions>
+    </mat-card>
+
+</div>
