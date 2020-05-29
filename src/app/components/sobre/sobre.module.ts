@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SobreRoutingModule } from './sobre-routing.module';
-import { SobreComponent } from './sobre.component';
+import { MaterialModule } from 'src/app/material.module';
 
 
 @NgModule({
-  declarations: [SobreComponent],
+  declarations: [],
   imports: [
     CommonModule,
-    SobreRoutingModule
+    SobreRoutingModule,
+    MaterialModule
   ]
 })
 export class SobreModule { }
