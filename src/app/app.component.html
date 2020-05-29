@@ -1,35 +1,47 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span fxFlex>
-            <button mat-icon-button matTooltip="Menu" (click)="drawer.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
-        </span>
-    </mat-toolbar-row>
-</mat-toolbar>
-<mat-drawer-container class="drawer-container" autosize>
-    <mat-drawer #drawer class="drawer-sidenav" mode="over">
-        <mat-nav-list>
-            <a mat-list-item routerLink="home" (click)="drawer.toggle()">
-                <mat-icon>home</mat-icon>
-                &nbsp;&nbsp;&nbsp;Home
-            </a>
-        </mat-nav-list>
-        <mat-nav-list>
-            <a mat-list-item routerLink="sobre" (click)="drawer.toggle()">
-                <mat-icon>info</mat-icon>
-                &nbsp;&nbsp;&nbsp;Sobre
-            </a>
-        </mat-nav-list>
-        <mat-divider></mat-divider>
-        <mat-nav-list>
-            <a mat-list-item (click)="drawer.toggle(); logout()">
-                <mat-icon>power_settings_new</mat-icon>
-                &nbsp;&nbsp;&nbsp;Sair
-            </a>
-        </mat-nav-list>
-    </mat-drawer>
-    <div class="drawer-sidenav-content">
-        <router-outlet></router-outlet>
+<div [ngClass]="{'dark-theme': isDarkTheme | async}">
+    <div class="mat-app-background">
+        <mat-toolbar color="primary" class="light-theme">
+            <mat-toolbar-row>
+                <button mat-icon-button matTooltip="Menu" (click)="drawer.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <span fxFlex> </span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-drawer-container class="drawer-container" autosize>
+            <mat-drawer #drawer class="drawer-sidenav" mode="over">
+                <mat-nav-list>
+                    <a mat-list-item routerLink="home" (click)="drawer.toggle()">
+                        <mat-icon color="accent">home</mat-icon>
+                        <span>Home</span>
+                    </a>
+                </mat-nav-list>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="sobre" (click)="drawer.toggle()">
+                        <mat-icon color="accent">info</mat-icon>
+                        <span>Sobre</span>
+                    </a>
+                </mat-nav-list>
+                <mat-divider></mat-divider>
+                <!-- <mat-slide-toggle style="margin-left: 15px;" [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
+                    Tema escuro
+                </mat-slide-toggle> -->
+                <mat-nav-list>
+                    <a  mat-list-item (click)="drawer.toggle(); toggleDarkTheme(!isDark)">
+                        <span *ngIf="isDark">Tema claro</span>
+                        <span *ngIf="!isDark">Tema escuro</span>
+                    </a>
+                </mat-nav-list>
+                <mat-nav-list>
+                    <a mat-list-item (click)="drawer.toggle(); logout()">
+                        <!-- <mat-icon color="accent">power_settings_new</mat-icon> -->
+                        <span>Sair</span>
+                    </a>
+                </mat-nav-list>
+            </mat-drawer>
+            <div class="drawer-sidenav-content">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-drawer-container>
     </div>
-</mat-drawer-container>
+</div>

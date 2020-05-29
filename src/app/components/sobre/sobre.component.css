@@ -9,3 +9,9 @@
     background-size: cover;
     background-position: center;
 }
+
+.header-image-dev {
+    background-image: url('https://fonts.gstatic.com/s/i/materialicons/code/v5/24px.svg?download=true');
+    background-size: cover;
+    background-position: center;
+}
