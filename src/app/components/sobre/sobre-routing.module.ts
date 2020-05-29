@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { SobreComponent } from './sobre.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 
-
 const routes: Routes = [
   { path: '', component: SobreComponent, canActivate: [AuthGuard] }
 ];

@@ -15,13 +15,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SobreComponent } from './components/sobre/sobre.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ThemeService } from './core/services/theme.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    SobreComponent
+    SobreComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { SobreComponent } from './components/sobre/sobre.component';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [ThemeService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

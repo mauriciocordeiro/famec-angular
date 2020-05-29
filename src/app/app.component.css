@@ -13,5 +13,9 @@
 .drawer-sidenav {
     padding: 0px;
     min-width: 25%;
-    max-width: 75%;
+    max-width: 50%;
+}
+
+span {
+    padding-left: 20px;
 }
