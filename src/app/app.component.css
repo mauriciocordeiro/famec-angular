@@ -1,0 +1,17 @@
+.drawer-container {
+    width: 100%;
+    height: calc(100vh - 64px);
+}
+  
+.drawer-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.drawer-sidenav {
+    padding: 0px;
+    min-width: 25%;
+    max-width: 75%;
+}
