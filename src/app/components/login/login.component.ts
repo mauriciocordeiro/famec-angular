@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
   loginForm: FormGroup;
   isSubmitted = false;
@@ -28,6 +30,13 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    if(this.loginForm.invalid) {
+      this.snackBar.open("Login inválido!", "OK", {
+        duration: 2000
+      });
+      return;
+    }
+
     this.authService.login(this.loginForm.value).subscribe(
       res => {
         console.log(res);
