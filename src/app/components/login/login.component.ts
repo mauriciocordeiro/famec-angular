@@ -67,14 +67,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  init() {
-    this.authService.init()
-      .subscribe(response => {
-        this.snackBar.open("API inicializada.", response.status, { duration: 1500 });
-      }, error => {
-        this.snackBar.open("Erro ao inicializar a API.", error.status, { duration: 1500 });
-      })
-  }
-
 }

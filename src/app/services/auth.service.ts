@@ -3,7 +3,7 @@ import { Credencial } from '../interfaces/credencial';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-const ENDPOINT = "https://famec.herokuapp.com/api";
+const ENDPOINT = "https://famec.herokuapp.com/v1";
 
 @Injectable({
   providedIn: 'root'
