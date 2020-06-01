@@ -13,9 +13,15 @@
 .drawer-sidenav {
     padding: 0px;
     min-width: 25%;
-    max-width: 50%;
+    max-width: 75%;
 }
 
 span {
-    padding-left: 20px;
+    padding-left: 25px;
+}
+
+.card-header-image {
+    background-image: url('https://fonts.gstatic.com/s/i/materialicons/account_box/v6/24px.svg?download=true');
+    background-size: cover;
+    background-position: center;
 }
