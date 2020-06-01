@@ -7,8 +7,11 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'home', loadChildren: () => import('./components/home/home.module').then(module => module.HomeModule) },
+  { path: 'familias', loadChildren: () => import('./components/familia/familia.module').then(module => module.FamiliaModule) },
+  { path: 'usuarios', loadChildren: () => import('./components/usuario/usuario.module').then(module => module.UsuarioModule) },
   { path: 'sobre', loadChildren: () => import('./components/sobre/sobre.module').then(module => module.SobreModule) },
-  { path: '**', component: NotFoundComponent }
+  { path: '**', redirectTo: '404' },
+  { path: '404', component: NotFoundComponent }
 ];
 
 @NgModule({
