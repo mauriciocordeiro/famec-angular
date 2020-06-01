@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Credencial } from '../interfaces/credencial';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -12,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public login(credencial: Credencial) : Observable<any> {
+  public login(credencial) : Observable<any> {
     return this.http.post<any>(ENDPOINT+'/login', credencial);
   }
 
@@ -22,6 +21,7 @@ export class AuthService {
 
   public logout(){
     localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('usuario');
   }
 
   public init() {

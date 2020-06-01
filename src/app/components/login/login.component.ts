@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { environment as env } from './../../../environments/environment';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,9 +19,6 @@ export class LoginComponent implements OnInit {
     private snackBar: MatSnackBar) { }
 
   loginForm: FormGroup;
-  isSubmitted = false;
-
-  isProdMode = false;
 
   ngOnInit(): void {
     if(this.authService.isLoggedIn())
@@ -33,8 +28,6 @@ export class LoginComponent implements OnInit {
       usuario: new FormControl('', [Validators.required]),
       senha: new FormControl('', [Validators.required])
     });
-
-    this.isProdMode = env.production;
   }
 
   login() {
@@ -52,14 +45,14 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
       },
       err => {
-        switch(err.status) {
+        switch(err.error.status) {
           case 401:
-            this.snackBar.open("Usuário ou senha incorreta!", "OK", {
+            this.snackBar.open(err.error.message, err.error.status, {
               duration: 2000
             });
           break;
           default:
-            this.snackBar.open("Erro ao autenticar!", "OK", {
+            this.snackBar.open(err.error.message, err.error.status, {
               duration: 2000
             });
           break;
