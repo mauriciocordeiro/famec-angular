@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiFamec: "https://famec.herokuapp.com/v1"
 };
