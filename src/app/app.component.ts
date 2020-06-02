@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ThemeService } from './core/services/theme.service';
 import { Usuario } from './model/usuario';
 import { MatDrawer } from '@angular/material/sidenav';
+import { LoaderService } from './core/services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +20,15 @@ export class AppComponent {
   usuario: Usuario = new Usuario();
   isLoggedIn = false;
 
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   @ViewChild('drawer') drawer: MatDrawer;
 
   constructor(
     private authService: AuthService, 
     private router: Router, 
-    private themeService: ThemeService) { }
+    private themeService: ThemeService,
+    private loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.isDarkTheme = this.themeService.isDarkTheme;

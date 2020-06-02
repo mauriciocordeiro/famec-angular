@@ -13,11 +13,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ThemeService } from './core/services/theme.service';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from './components/shared/breadcrumb/breadcrumb.component';
+import { LoaderComponent } from './components/shared/loader/loader.component';
+import { LoaderService } from './core/services/loader.service';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     HomeComponent,
     SobreComponent,
     NotFoundComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,11 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ThemeService],
+  providers: [
+    ThemeService,
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

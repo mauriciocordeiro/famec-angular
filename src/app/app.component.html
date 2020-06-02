@@ -1,5 +1,6 @@
 <div [ngClass]="{'dark-theme': isDarkTheme | async}">
     <div class="mat-app-background">
+        <app-loader *ngIf="isLoading | async"></app-loader>
         <mat-toolbar color="primary" class="light-theme">
             <mat-toolbar-row>
                 <button mat-icon-button matTooltip="Menu" (click)="toggleSidenav()">

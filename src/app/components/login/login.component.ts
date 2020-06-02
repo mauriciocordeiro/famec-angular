@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
 
   hide = true;
+  loading = false;
 
   constructor(
     private authService: AuthService,
@@ -59,5 +60,7 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+
+    
   }
 }
