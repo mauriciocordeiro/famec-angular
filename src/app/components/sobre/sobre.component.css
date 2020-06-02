@@ -5,7 +5,7 @@
 }
 
 .header-image-famec {
-    background-image: url('http://www.famec.org.br/wp-content/uploads/2016/06/logo-2.png');
+    background-image: url('../../../assets/img/logo-2.png');
     background-size: cover;
     background-position: center;
 }

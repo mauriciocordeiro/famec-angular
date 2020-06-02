@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ThemeService } from './core/services/theme.service';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ThemeService } from './core/services/theme.service';
     LoginComponent,
     HomeComponent,
     SobreComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
