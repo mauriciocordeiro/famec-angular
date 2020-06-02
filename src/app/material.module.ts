@@ -21,6 +21,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'; 
 import { MatMenuModule } from '@angular/material/menu'; 
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
    imports: [
@@ -44,7 +45,8 @@ import { MatMenuModule } from '@angular/material/menu';
       MatCardModule,
       MatSnackBarModule,
       MatSlideToggleModule,
-      MatMenuModule
+      MatMenuModule,
+      MatProgressSpinnerModule
    ],
    exports: [
       MatButtonModule,
@@ -66,7 +68,8 @@ import { MatMenuModule } from '@angular/material/menu';
       MatCardModule,
       MatSnackBarModule,
       MatSlideToggleModule,
-      MatMenuModule
+      MatMenuModule,
+      MatProgressSpinnerModule
    ],
    providers: [
       MatDatepickerModule,
