@@ -8,7 +8,7 @@
 .breadcrumb{
     padding: 20px;
 }
-a {
+.breadcrumb-a {
     color: white;
     text-decoration: none;
 }
