@@ -25,3 +25,11 @@ span {
     background-size: cover;
     background-position: center;
 }
+
+mat-toolbar {
+    z-index: 3;
+}
+
+mat-drawer-container {
+    z-index: 1;
+}
