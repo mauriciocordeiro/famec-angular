@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ThemeService } from './core/services/theme.service';
 import { Usuario } from './model/usuario';
@@ -54,9 +54,7 @@ export class AppComponent {
     if(localStorage.getItem('usuario'))
       this.usuario = JSON.parse(localStorage.getItem('usuario'));
 
-    
     this.isLoggedIn = this.authService.isLoggedIn();
-
     this.drawer.toggle();
   }
 }
