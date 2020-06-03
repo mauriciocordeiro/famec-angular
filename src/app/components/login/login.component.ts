@@ -40,9 +40,9 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.loginForm.value).subscribe(
-      res => {
-        localStorage.setItem('ACCESS_TOKEN', res.token);
-        localStorage.setItem('usuario', JSON.stringify(res));
+      usuario => {
+        localStorage.setItem('FAMEC_ACCESS_TOKEN', usuario.token);
+        localStorage.setItem('usuario', JSON.stringify(usuario));
         this.router.navigateByUrl('/home');
       },
       err => {
