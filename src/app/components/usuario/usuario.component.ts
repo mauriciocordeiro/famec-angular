@@ -17,7 +17,7 @@ export class UsuarioComponent implements OnInit {
         console.log('usuários: ', usuarios);
       },
       err => {
-        console.log('error', err)
+        console.log('error', err);
       }
     );
   }
