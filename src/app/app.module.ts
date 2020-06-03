@@ -21,6 +21,7 @@ import { BreadcrumbComponent } from './components/shared/breadcrumb/breadcrumb.c
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { LoaderService } from './core/services/loader.service';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { TokenValidatorInterceptor } from './interceptors/token-validator.interceptor';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
   providers: [
     ThemeService,
     LoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenValidatorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

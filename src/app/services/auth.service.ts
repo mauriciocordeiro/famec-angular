@@ -13,16 +13,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  public login(credencial: Usuario) : Observable<any> {
+  public login(credencial: Usuario) : Observable<Usuario> {
     return this.http.post<any>(API+'/login', credencial);
   }
 
   public isLoggedIn(){
-    return localStorage.getItem('ACCESS_TOKEN') !== null;
+    return localStorage.getItem('FAMEC_ACCESS_TOKEN') !== null;
   }
 
   public logout(){
-    localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('FAMEC_ACCESS_TOKEN');
     localStorage.removeItem('usuario');
   }
 
