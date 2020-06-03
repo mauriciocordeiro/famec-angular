@@ -14,7 +14,8 @@
             <mat-drawer #drawer class="drawer-sidenav" mode="over">
                 <mat-list *ngIf="isLoggedIn">
                     <mat-list-item>
-                        <mat-icon mat-list-icon color="accent">account_circle</mat-icon>
+                        <!-- <mat-icon mat-list-icon color="accent">account_circle</mat-icon> -->
+                        <div mat-list-icon class="img-perfil"></div>
                         <div mat-line><strong>{{ usuario.nmUsuario }}</strong></div>
                         <div mat-line><i>{{ usuario.nmRole }}</i></div>
                         <button mat-icon-button matTooltip="Abrir perfil">
