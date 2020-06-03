@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { ThemeService } from './core/services/theme.service';
 import { Usuario } from './model/usuario';
@@ -26,15 +25,14 @@ export class AppComponent {
 
   constructor(
     private authService: AuthService, 
-    private router: Router, 
     private themeService: ThemeService,
     private loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.isDarkTheme = this.themeService.isDarkTheme;
 
-    if(localStorage.getItem('usuario')) {
-      this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    if(this.authService.getUser()) {
+      this.usuario = this.authService.getUser();
     }
     
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -54,8 +52,9 @@ export class AppComponent {
   }
 
   toggleSidenav() {
-    if(localStorage.getItem('usuario'))
-      this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    if(this.authService.getUser()) {
+      this.usuario = this.authService.getUser();
+    }
 
     this.isLoggedIn = this.authService.isLoggedIn();
     this.drawer.toggle();

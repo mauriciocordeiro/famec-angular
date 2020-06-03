@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../model/usuario';
+import { Credencial } from '../interfaces/credencial';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
@@ -16,7 +17,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  public login(credencial: Usuario) : Observable<Usuario> {
+  public login(credencial: Credencial) : Observable<Usuario> {
     return this.http.post<any>(API+'/login', credencial);
   }
 
