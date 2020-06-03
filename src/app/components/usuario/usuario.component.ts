@@ -12,12 +12,14 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioService.getAll()
-      .then(usuarios => {
-        console.log(usuarios);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    .subscribe(
+      usuarios => {
+        console.log('usuários: ', usuarios);
+      },
+      err => {
+        console.log('error', err)
+      }
+    );
   }
 
 }
