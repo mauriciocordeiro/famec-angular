@@ -41,8 +41,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.loginForm.value).subscribe(
       usuario => {
-        localStorage.setItem('FAMEC_ACCESS_TOKEN', usuario.token);
-        localStorage.setItem('usuario', JSON.stringify(usuario));
+        this.authService.setUser(usuario);
         this.router.navigateByUrl('/home');
       },
       err => {

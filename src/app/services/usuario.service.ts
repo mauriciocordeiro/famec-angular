@@ -10,11 +10,7 @@ const API = environment.apiFamec;
   providedIn: 'root'
 })
 export class UsuarioService {
-
-  headers = { 
-    "Authorization": "Bearer " + localStorage.getItem('FAMEC_ACCESS_TOKEN') 
-  }
-
+  
   constructor(private http: HttpClient) { }
 
   public getAll() : Observable<Usuario[]> {
