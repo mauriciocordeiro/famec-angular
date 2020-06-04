@@ -5,6 +5,7 @@ import { ThemeService } from './core/services/theme.service';
 import { Usuario } from './model/usuario';
 import { MatDrawer } from '@angular/material/sidenav';
 import { LoaderService } from './core/services/loader.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent {
   isDarkTheme: Observable<boolean>;
   isDark = false;
 
-  usuario: Usuario = new Usuario();
+  usuario: Usuario;
   isLoggedIn = false;
 
   isLoading: Subject<boolean> = this.loaderService.isLoading;
@@ -59,4 +60,8 @@ export class AppComponent {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.drawer.toggle();
   }
+
+  // abrirPerfil() {
+  //   this.router.navigate(['/usuarios/usuario', this.usuario.cdUsuario])
+  // }
 }

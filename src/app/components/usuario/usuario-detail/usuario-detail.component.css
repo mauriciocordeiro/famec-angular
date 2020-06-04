@@ -1,0 +1,14 @@
+.main {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 64px);
+}
+
+.card-form {
+    /* margin-left: 5px;
+    margin-right: 5px; */
+}
+
+.card-content-form {
+
+}
