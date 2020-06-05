@@ -16,4 +16,16 @@ export class UsuarioService {
   public getAll() : Observable<Usuario[]> {
     return this.http.get<any>(API+'/usuarios');
   }
+
+  public get(id) : Observable<Usuario> {
+    return this.http.get<any>(`${API}/usuarios/${id}`);
+  }
+
+  public save(usuario: Usuario) : Observable<Usuario> {
+    if(usuario.cdUsuario) {
+      return this.http.put<any>(`${API}/usuarios/${usuario.cdUsuario}`, usuario);
+    } else {
+      return this.http.post<any>(`${API}/usuarios`, usuario);
+    }
+  }
 }
