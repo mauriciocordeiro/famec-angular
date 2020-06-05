@@ -2,10 +2,10 @@ import { Component, OnInit, Pipe, PipeTransform, ViewChild, ElementRef } from '@
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserRole } from 'src/app/enum/user-role.enum';
 import { Situacao } from 'src/app/enum/situacao.enum';
+import { SnackBarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-usuario-detail',
@@ -29,7 +29,7 @@ export class UsuarioDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute, 
     private usuarioService: UsuarioService,
-    private snackBar: MatSnackBar
+    private snackBar: SnackBarService
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +49,7 @@ export class UsuarioDetailComponent implements OnInit {
           },
           err => {
             let error = err.error;
-            this.snackBar.open(error.message, error.status, { duration: 2000 });
+            this.snackBar.error(error.message, error.status);
           }
         );
       }
@@ -58,12 +58,12 @@ export class UsuarioDetailComponent implements OnInit {
 
   onSubmit() {
     if(this.formGroup.invalid) {
-      this.snackBar.open("Existem campos inválidos.", "OK", { duration: 2000 });
+      this.snackBar.alert("Existem campos inválidos.");
       return;
     }
 
     if(this.formGroup.getRawValue().nmSenha != this.nmSenhaConfirm.nativeElement.value) {
-      this.snackBar.open("A senha não confere.", "OK", { duration: 2000 });
+      this.snackBar.alert("A senha não confere.");
       return;
     }
 
@@ -71,10 +71,10 @@ export class UsuarioDetailComponent implements OnInit {
       usuario => {
         this.usuario = usuario;
         this.formGroup = this.buildFormGroup(this.usuario);
-        this.snackBar.open("Salvo com sucesso.", "OK", { duration: 2000 });
+        this.snackBar.success("Salvo com sucesso.");
       }, err => {
         let error = err.error;
-        this.snackBar.open(error.message, error.status, { duration: 2000 });
+        this.snackBar.error(error.message, error.status);
       }
     );
 

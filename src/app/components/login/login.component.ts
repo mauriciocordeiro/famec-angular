@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from 'src/app/core/services/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar) { }
+    private snackBar: SnackBarService) { }
 
   loginForm: FormGroup;
 
@@ -33,9 +33,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     if(this.loginForm.invalid) {
-      this.snackBar.open("Login inválido!", "OK", {
-        duration: 2000
-      });
+      this.snackBar.alert("Login inválido!");
       return;
     }
 
@@ -47,19 +45,13 @@ export class LoginComponent implements OnInit {
       err => {
         switch(err.error.status) {
           case 401:
-            this.snackBar.open(err.error.message, err.error.status, {
-              duration: 2000
-            });
+            this.snackBar.error(err.error.message, err.error.status);
           break;
           default:
-            this.snackBar.open(err.error.message, err.error.status, {
-              duration: 2000
-            });
+            this.snackBar.error(err.error.message, err.error.status);
           break;
         }
       }
     );
-
-    
   }
 }

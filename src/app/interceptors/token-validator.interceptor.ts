@@ -6,13 +6,13 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
+import { SnackBarService } from '../core/services/snackbar.service';
 
 @Injectable()
 export class TokenValidatorInterceptor implements HttpInterceptor {
 
-  constructor(private snackBar: MatSnackBar, private authService: AuthService) { }
+  constructor(private snackBar: SnackBarService, private authService: AuthService) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (request.url.includes('/login')) {
@@ -22,7 +22,7 @@ export class TokenValidatorInterceptor implements HttpInterceptor {
       if (this.authService.isTokenValid()) {
         authReq = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + this.authService.getToken()) });
       } else {
-        this.snackBar.open('Autorização expirada. Por favor, autentique-se.', 'OK', { duration: 2000 });
+        this.snackBar.alert('Autorização expirada. Por favor, autentique-se.');
         this.authService.logout();
       }
       return next.handle(authReq);
