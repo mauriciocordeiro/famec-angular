@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/model/usuario';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usuario',
@@ -11,7 +12,7 @@ export class UsuarioComponent implements OnInit {
 
   usuarios: Usuario[] = [];
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.usuarioService.getAll()
@@ -20,7 +21,7 @@ export class UsuarioComponent implements OnInit {
         this.usuarios = usuarios;
       },
       err => {
-        console.log('error', err);
+        this.snackBar.open(err.error.message, err.error.status, { duration: 2000 });
       }
     );
   }
