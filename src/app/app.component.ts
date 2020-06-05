@@ -20,7 +20,7 @@ export class AppComponent {
   usuario: Usuario;
   isLoggedIn = false;
 
-  isLoading: Subject<boolean> = this.loaderService.isLoading;
+  isLoading: Subject<boolean>;
 
   @ViewChild('drawer') drawer: MatDrawer;
 
@@ -28,6 +28,10 @@ export class AppComponent {
     private authService: AuthService, 
     private themeService: ThemeService,
     private loaderService: LoaderService) { }
+
+  ngOnChanges() {
+    this.isLoading = this.loaderService.isLoading;
+  }
 
   ngOnInit(): void {
     this.isDarkTheme = this.themeService.isDarkTheme;
