@@ -20,7 +20,7 @@ export class AppComponent {
   usuario: Usuario;
   isLoggedIn = false;
 
-  isLoading: Subject<boolean>;
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   @ViewChild('drawer') drawer: MatDrawer;
 
