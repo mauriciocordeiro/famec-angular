@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IfStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-sobre',

@@ -1,0 +1,15 @@
+<mat-list >
+    <mat-list-item >
+        <div mat-list-icon class="img-perfil"></div>
+        <div mat-line><strong>{{ usuario.nmUsuario }}</strong></div>
+        <div mat-line><i>{{ usuario.nmLogin }}</i></div>
+        <div mat-line>{{ usuario.nmEmail }}</div>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/usuarios/usuario', usuario.cdUsuario]">Ver</button>
+          </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon color="accent">more_vert</mat-icon>
+        </button>
+    </mat-list-item>
+</mat-list>
+<mat-divider></mat-divider>

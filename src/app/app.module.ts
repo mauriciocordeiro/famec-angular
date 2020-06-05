@@ -22,6 +22,9 @@ import { LoaderComponent } from './components/shared/loader/loader.component';
 import { LoaderService } from './core/services/loader.service';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { TokenValidatorInterceptor } from './interceptors/token-validator.interceptor';
+import { UsuarioDetailComponent } from './components/usuario/usuario-detail/usuario-detail.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { UsuarioItemListComponent } from './components/usuario/usuario-item-list/usuario-item-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { TokenValidatorInterceptor } from './interceptors/token-validator.interc
     SobreComponent,
     NotFoundComponent,
     BreadcrumbComponent,
-    LoaderComponent
+    LoaderComponent,
+    UsuarioComponent,
+    UsuarioDetailComponent,
+    UsuarioItemListComponent
   ],
   imports: [
     BrowserModule,
