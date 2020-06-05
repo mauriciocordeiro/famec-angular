@@ -71,7 +71,7 @@ export class UsuarioDetailComponent implements OnInit {
       usuario => {
         this.usuario = usuario;
         this.formGroup = this.buildFormGroup(this.usuario);
-        this.snackBar.open("Editado com sucesso.", "OK", { duration: 2000 });
+        this.snackBar.open("Salvo com sucesso.", "OK", { duration: 2000 });
       }, err => {
         let error = err.error;
         this.snackBar.open(error.message, error.status, { duration: 2000 });
