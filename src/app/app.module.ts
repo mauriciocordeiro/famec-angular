@@ -25,8 +25,8 @@ import { TokenValidatorInterceptor } from './interceptors/token-validator.interc
 import { UsuarioDetailComponent } from './components/usuario/usuario-detail/usuario-detail.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { UsuarioItemListComponent } from './components/usuario/usuario-item-list/usuario-item-list.component';
-
 import { GravatarModule } from 'ngx-gravatar';
+import { FamiliaComponent } from './components/familia/familia.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import { GravatarModule } from 'ngx-gravatar';
     LoaderComponent,
     UsuarioComponent,
     UsuarioDetailComponent,
-    UsuarioItemListComponent
+    UsuarioItemListComponent,
+    FamiliaComponent
   ],
   imports: [
     BrowserModule,

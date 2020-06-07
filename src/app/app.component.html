@@ -14,7 +14,6 @@
             <mat-drawer #drawer class="drawer-sidenav" mode="over">
                 <mat-list *ngIf="isLoggedIn">
                     <mat-list-item>
-                        <!-- <div mat-list-icon class="img-perfil"></div> -->
                         <img ngxGravatar mat-list-icon [email]="usuario.nmEmail" />
                         <div mat-line><strong>{{ usuario.nmUsuario }}</strong></div>
                         <div mat-line><i>{{ usuario.nmRole }}</i></div>
