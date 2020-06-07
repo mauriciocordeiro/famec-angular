@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserRole } from 'src/app/enum/user-role.enum';
 import { Situacao } from 'src/app/enum/situacao.enum';
 import { SnackBarService } from 'src/app/core/services/snackbar.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-usuario-detail',
@@ -14,7 +15,7 @@ import { SnackBarService } from 'src/app/core/services/snackbar.service';
   
 })
 export class UsuarioDetailComponent implements OnInit {
-
+  isAdmin = false;
   usuario: Usuario;
 
   userRole = [
@@ -29,10 +30,12 @@ export class UsuarioDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute, 
     private usuarioService: UsuarioService,
-    private snackBar: SnackBarService
+    private snackBar: SnackBarService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
     this.formGroup = this.buildFormGroup(new Usuario());
 
     this.loadUsuario();

@@ -1,6 +1,6 @@
 <mat-list >
     <mat-list-item >
-        <div mat-list-icon class="img-perfil"></div>
+        <img ngxGravatar mat-list-icon [email]="usuario.nmEmail" size="50"/>
         <div mat-line><strong>{{ usuario.nmUsuario }}</strong></div>
         <div mat-line><i>{{ usuario.nmLogin }}</i></div>
         <div mat-line>{{ usuario.nmEmail }}</div>
