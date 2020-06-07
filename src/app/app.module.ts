@@ -27,6 +27,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { UsuarioItemListComponent } from './components/usuario/usuario-item-list/usuario-item-list.component';
 import { GravatarModule } from 'ngx-gravatar';
 import { FamiliaComponent } from './components/familia/familia.component';
+import { FamiliaItemComponent } from './components/familia/familia-item/familia-item.component';
+import { FamiliaDetailComponent } from './components/familia/familia-detail/familia-detail.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { FamiliaComponent } from './components/familia/familia.component';
     UsuarioComponent,
     UsuarioDetailComponent,
     UsuarioItemListComponent,
-    FamiliaComponent
+    FamiliaComponent,
+    FamiliaItemComponent,
+    FamiliaDetailComponent
   ],
   imports: [
     BrowserModule,

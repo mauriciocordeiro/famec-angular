@@ -1,3 +1,6 @@
 <div class="main">
-    <div *ngFor="let familia of familias"> {{ familia.nrProntuario }}</div>
+    <app-familia-item *ngFor="let familia of familias" [familia]="familia"> </app-familia-item>
+    <button id="add-button" mat-fab color="primary" [routerLink]="['/familias/familia']">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>
