@@ -26,6 +26,8 @@ import { UsuarioDetailComponent } from './components/usuario/usuario-detail/usua
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { UsuarioItemListComponent } from './components/usuario/usuario-item-list/usuario-item-list.component';
 
+import { GravatarModule } from 'ngx-gravatar';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +49,9 @@ import { UsuarioItemListComponent } from './components/usuario/usuario-item-list
     FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     HttpClientModule,
+
+    GravatarModule,
+    
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [

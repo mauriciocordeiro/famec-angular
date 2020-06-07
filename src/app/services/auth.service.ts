@@ -6,6 +6,7 @@ import { Usuario } from '../model/usuario';
 import { Credencial } from '../interfaces/credencial';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { UserRole } from '../enum/user-role.enum';
 
 const jwtHelper = new JwtHelperService();
 const API = environment.apiFamec;
@@ -46,6 +47,14 @@ export class AuthService {
     localStorage.setItem('usuario', JSON.stringify(user));
     if(user.token)
       this.setToken(user.token);
+  }
+
+  getUserRole(): string {
+    return this.getUser().nmRole;
+  }
+
+  isAdmin(): boolean {
+    return this.getUser().nmRole == UserRole.ADMIN.valueOf();
   }
 
   public logout(){
