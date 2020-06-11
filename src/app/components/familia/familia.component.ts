@@ -3,6 +3,7 @@ import { FamiliaService } from 'src/app/services/familia.service';
 import { SnackBarService } from 'src/app/core/services/snackbar.service';
 import { Familia } from 'src/app/model/familia';
 import * as moment from 'moment';
+import { Turno as TurnoEnum } from 'src/app/enum/turno.enum';
 
 @Component({
   selector: 'app-familia',
@@ -12,10 +13,13 @@ import * as moment from 'moment';
 export class FamiliaComponent implements OnInit {
 
   familias: Familia[];
+
   displayedColumns: string[] = [
     'menu', 'nrProntuario', 'nmAluno', 'dtNascimento', 'nrIdade', 
     'nmEscola', 'tpTurnoFamec', 'dsEndereco','nmBairro', 'nmResponsavel', 'nrTelefone1'
   ];
+
+  turnos = ["", "Matutino", "Vespertino", "Noturno", "Diurno"];
 
   constructor(private familiaService: FamiliaService, private snackBar: SnackBarService) { }
 
@@ -36,6 +40,10 @@ export class FamiliaComponent implements OnInit {
 
   getIdade(data) {
     return Math.floor(moment().diff(data, 'years'));
+  }
+
+  getTurno(tpTurno) {
+    return this.turnos[tpTurno];
   }
 
 }
