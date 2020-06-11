@@ -26,3 +26,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-width: 0px;
     border-left-width: 15px;
 }
+
+.xng-breadcrumb-root {
+    color: white !important;
+    text-decoration: none;
+}
+

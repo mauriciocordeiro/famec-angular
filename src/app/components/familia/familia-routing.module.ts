@@ -7,7 +7,7 @@ import { FamiliaDetailComponent } from './familia-detail/familia-detail.componen
 
 const routes: Routes = [
   { path: '', component: FamiliaComponent, canActivate: [AuthGuard] },
-  { path: 'familia', component: FamiliaDetailComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Família' } },
+  { path: 'familia', component: FamiliaDetailComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Novo' } },
   { path: 'familia/:id', component: FamiliaDetailComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Família' } }
 ];
 

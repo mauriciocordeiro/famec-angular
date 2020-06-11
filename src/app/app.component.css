@@ -39,3 +39,11 @@ mat-toolbar {
 mat-drawer-container {
     z-index: 1;
 }
+::ng-deep .xng-breadcrumb-trail {
+    color: white !important;
+}
+
+.breadcrumb {
+    margin-left: 15px;
+}
+
