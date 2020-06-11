@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FamiliaService } from 'src/app/services/familia.service';
 import { SnackBarService } from 'src/app/core/services/snackbar.service';
 import { Familia } from 'src/app/model/familia';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-familia',
@@ -11,6 +12,10 @@ import { Familia } from 'src/app/model/familia';
 export class FamiliaComponent implements OnInit {
 
   familias: Familia[];
+  displayedColumns: string[] = [
+    'menu', 'nrProntuario', 'nmAluno', 'dtNascimento', 'nrIdade', 
+    'nmEscola', 'tpTurnoFamec', 'dsEndereco','nmBairro', 'nmResponsavel', 'nrTelefone1'
+  ];
 
   constructor(private familiaService: FamiliaService, private snackBar: SnackBarService) { }
 
@@ -27,6 +32,10 @@ export class FamiliaComponent implements OnInit {
         this.snackBar.error(err.error.message);
       }
     )
+  }
+
+  getIdade(data) {
+    return Math.floor(moment().diff(data, 'years'));
   }
 
 }

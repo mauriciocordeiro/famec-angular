@@ -5,7 +5,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, data: { breadcrumb: { skip: true } } },
   { path: 'home', loadChildren: () => import('./components/home/home.module').then(module => module.HomeModule), data: { breadcrumb: 'Home' } },
   { path: 'familias', loadChildren: () => import('./components/familia/familia.module').then(module => module.FamiliaModule), data: { breadcrumb: 'Famílias' } },
   { path: 'usuarios', loadChildren: () => import('./components/usuario/usuario.module').then(module => module.UsuarioModule), data: { breadcrumb: 'Usuários' } },
