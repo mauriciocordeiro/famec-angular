@@ -2,6 +2,8 @@
     position: relative;
     width: calc(100vw - 20px);
     height: calc(100vh - 64px);
+    background-color: white;
+    padding-top: 10px;
 }
 
 #add-button {
@@ -29,5 +31,8 @@ td {
 
 .search {
     width: 100%;
+}
 
+.search-btn {
+    margin-top: 10px;
 }

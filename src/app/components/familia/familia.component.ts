@@ -24,22 +24,23 @@ export class FamiliaComponent implements OnInit {
   constructor(private familiaService: FamiliaService, private snackBar: SnackBarService) { }
 
   ngOnInit(): void {
-    this.getAll();
+    this.search();
   }
 
-  getAll() {
-    this.familiaService.getAll().subscribe(
+  search(nrProntuario?, nmAluno?, nmResponsavel?) {
+    this.familiaService.getAll(nrProntuario, nmAluno, nmResponsavel).subscribe(
       familias => {
         this.familias = familias;
       },
       err => {
+        this.familias = [];
         this.snackBar.error(err.error.message);
       }
     )
   }
 
   getIdade(data) {
-    return Math.floor(moment().diff(data, 'years'));
+    return Math.floor(moment().diff(data, 'years', true));
   }
 
   getTurno(tpTurno) {
