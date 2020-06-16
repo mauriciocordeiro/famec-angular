@@ -13,4 +13,11 @@ export class Familia {
     responsavel:Responsavel;
     habitacao:Habitacao;
     perfilSocial:PerfilSocial;
+
+    constructor() {
+        this.responsavel = new Responsavel();
+        this.habitacao = new Habitacao();
+        this.perfilSocial = new PerfilSocial();
+        this.alunos = [];
+    }
 }

@@ -25,4 +25,8 @@ export class Responsavel {
     nrTelefoneTrabalho:string;
 
     enderecoResponsavel:EnderecoResponsavel;
+
+    constructor() {
+        this.enderecoResponsavel = new EnderecoResponsavel();
+    }
 }

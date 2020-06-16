@@ -1,3 +1,264 @@
 <div class="main">
-    
+    <mat-card>
+        <form>
+            <mat-card-content [formGroup]="formGroup">
+                <mat-accordion class="headers-align">
+                    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i>Responsável</i>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                I - Identificação do responsável
+                                <mat-icon>supervisor_account</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <!-- ln1 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex="10" appearance="fill">
+                                <mat-label>Prontuário</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput required
+                                    formControlName="nrProntuario" placeholder="007">
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Nome</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput required
+                                    formControlName="nmResponsavel"
+                                    placeholder="Pedro de Alcântara Francisco António João Carlos Xavier de Paula Miguel Rafael Joaquim José Gonzaga Pascoal Cipriano Serafim de Bragança e Bourbon">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="10" appearance="fill">
+                                <mat-label>Parentesco</mat-label>
+                                <mat-select formControlName="tpParentesco">
+                                    <mat-option *ngFor="let item of parentesco" [value]="item.id">
+                                        {{item.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="10" appearance="fill">
+                                <mat-label>Sexo</mat-label>
+                                <mat-select formControlName="tpGenero">
+                                    <mat-option *ngFor="let item of sexo" [value]="item.id">
+                                        {{item.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ln2 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Endereço</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput required
+                                    formControlName="nmRua" placeholder="Av. Ivo Freire de Aguiar">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="10" appearance="fill">
+                                <mat-label>Nº</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number" required
+                                    formControlName="nrCasa" placeholder="637">
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ln3 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex="25" appearance="fill">
+                                <mat-label>Bairro</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput required
+                                    formControlName="nmBairro" placeholder="Candeias">
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Ponto de referência</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nmComplemento" placeholder="Próx. ao ">
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ln4 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Data de Nascimento</mat-label>
+                                <input matInput [matDatepicker]="dpDtNasc">
+                                <mat-datepicker-toggle matSuffix [for]="dpDtNasc"></mat-datepicker-toggle>
+                                <mat-datepicker  #dpDtNasc></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Naturalidade</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nmNaturalidade" placeholder="Vitória da Conquista - BA">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="20" appearance="fill">
+                                <mat-label>Estado Civil</mat-label>
+                                <mat-select formControlName="tpEstadoCivil">
+                                    <mat-option *ngFor="let estado of estadoCivil" [value]="estado.id">
+                                        {{estado.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ln5 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Telefone 1</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nrTelefone1" placeholder="(77) 0000-0000">
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Telefone 2</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nrTelefone2" placeholder="(77) 99191-9911">
+                            </mat-form-field>
+
+                            <mat-form-field fxFlex="20" appearance="fill">
+                                <mat-label>RG</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nrRg"
+                                    required placeholder="0000000000">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="15" appearance="fill">
+                                <mat-label>Órgão Emissor</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nmOrgaoExpedidorRg" placeholder="SSP">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="5" appearance="fill">
+                                <mat-label>UF</mat-label>
+                                <mat-select formControlName="sgUfRg">
+                                    <mat-option *ngFor="let item of sgUf" [value]="item">
+                                        {{item}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="20" appearance="fill">
+                                <mat-label>CPF</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nrCpf"
+                                    required placeholder="000.000.000-00">
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ln6 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Escolaridade</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="dsEscolaridade">
+                            </mat-form-field>
+                            <mat-checkbox #ckEstudante formControlName="lgEstudante" (change)=onChangeEstudando($event)
+                                color="primary">
+                                Estudando atualmente
+                            </mat-checkbox>
+
+                            <mat-form-field fxFlex="15" appearance="fill">
+                                <mat-label>Horário Escolar</mat-label>
+                                <mat-select formControlName="tpTurno">
+                                    <mat-option *ngFor="let hrEscola of horarioEscolar" [value]="hrEscola.id">
+                                        {{hrEscola.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="15" appearance="fill">
+                                <mat-label>Nível</mat-label>
+                                <mat-select formControlName="tpNivelEscolar">
+                                    <mat-option *ngFor="let nivel of nivelEscolaridade" [value]="nivel.id">
+                                        {{nivel.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="10" appearance="fill">
+                                <mat-label>Ano</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number">
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ln7 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Ocupação atual</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nmOcupacao">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="10" appearance="fill">
+                                <mat-label>Renda mensal</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number"
+                                    formControlName="vlRendaMensal">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="30" appearance="fill">
+                                <mat-label>Local de trabalho</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nmLocalTrabalho">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="10" appearance="fill">
+                                <mat-label>Telefone</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nrTelefoneTrabalho" type="tel" placeholder="(77) 0000-0000">
+                            </mat-form-field>
+                        </div>
+
+                        <mat-action-row>
+                            <button mat-button type="button" color="primary" (click)="nextStep()">Próximo</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i>Social</i>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                II - Perfil Social
+                                <mat-icon>accessibility</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+
+                        <mat-action-row>
+                            <button mat-button type="button" color="warn" (click)="prevStep()">Anterior</button>
+                            <button mat-button type="button" color="primary" (click)="nextStep()">Próximo</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i>Habitação</i>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                III - Condições Habitacionais
+                                <mat-icon>location_city</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+
+                        <mat-action-row>
+                            <button mat-button type="button" color="warn" (click)="prevStep()">Anterior</button>
+                            <button mat-button type="button" color="primary" (click)="nextStep()">Próximo</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i>Alunos</i>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                IV - Composição Familiar (Criança ou adolescente matriculado)
+                                <mat-icon>school</mat-icon>
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+
+                        <mat-action-row>
+                            <button type="button" mat-button color="warn" (click)="prevStep()">Anterior</button>
+                            <button type="button" mat-button color="primary" (click)="nextStep()">Fim</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card-content>
+            <mat-card-actions fxLayout="row" fxLayoutAlign="end end">
+                <button mat-button color="accent" type="button" [routerLink]="['/familias']">Voltar</button>
+                <button mat-raised-button color="primary" type="submit">
+                    <mat-icon>save</mat-icon>
+                    <span style="padding-left: 10px;">Salvar</span>
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
 </div>

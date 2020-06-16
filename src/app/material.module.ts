@@ -22,6 +22,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'; 
 import { MatMenuModule } from '@angular/material/menu'; 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatExpansionModule } from '@angular/material/expansion'; 
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
    imports: [
@@ -46,7 +49,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       MatSnackBarModule,
       MatSlideToggleModule,
       MatMenuModule,
-      MatProgressSpinnerModule
+      MatProgressSpinnerModule,
+      MatExpansionModule,
+      MatCheckboxModule,
+      MatNativeDateModule
    ],
    exports: [
       MatButtonModule,
@@ -69,10 +75,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       MatSnackBarModule,
       MatSlideToggleModule,
       MatMenuModule,
-      MatProgressSpinnerModule
+      MatProgressSpinnerModule,
+      MatExpansionModule,
+      MatCheckboxModule,
+      MatNativeDateModule
    ],
    providers: [
       MatDatepickerModule,
+      MatNativeDateModule
    ]
 })
 
