@@ -15,7 +15,7 @@ export class Responsavel {
     nmOrgaoExpedidorRg:string;
     sgUfRg:string;
     nrCpf:string;
-    dsEsclaridade:string;
+    dsEscolaridade:string;
     lgEstudante:number;
     tpNivelEscolar:number;
     tpTurno:number;

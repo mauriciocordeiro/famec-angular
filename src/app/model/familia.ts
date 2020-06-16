@@ -5,7 +5,7 @@ import { PerfilSocial } from './perfil-social';
 
 export class Familia {
     cdFamilia:number;
-    dtCadastro:number;
+    dtCadastro:Date;
     cdUsuarioCadastro:number;
     nrProntuario:string;
 

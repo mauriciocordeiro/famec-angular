@@ -1,6 +1,6 @@
 <div class="main">
     <mat-card>
-        <form>
+        <form (ngSubmit)="onSubmit()">
             <mat-card-content [formGroup]="formGroup">
                 <mat-accordion class="headers-align">
                     <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
@@ -77,9 +77,9 @@
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
                             <mat-form-field appearance="fill">
                                 <mat-label>Data de Nascimento</mat-label>
-                                <input matInput [matDatepicker]="dpDtNasc">
+                                <input matInput [matDatepicker]="dpDtNasc" formControlName="dtNascimento">
                                 <mat-datepicker-toggle matSuffix [for]="dpDtNasc"></mat-datepicker-toggle>
-                                <mat-datepicker  #dpDtNasc></mat-datepicker>
+                                <mat-datepicker #dpDtNasc></mat-datepicker>
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>Naturalidade</mat-label>
@@ -208,6 +208,35 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
 
+                        <!-- ln1 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-checkbox formControlName="lgBeneficio" color="primary">
+                                Recebe algum benefício ou participa de algum programa Federal, Estadual ou Municipal?
+                                Bolsa Família, BPC,
+                                outros
+                            </mat-checkbox>
+                        </div>
+
+                        <!-- ln2 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Nome do Programa/Benefício</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    formControlName="nmBeneficio">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="15" appearance="fill">
+                                <mat-label>Valor</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number"
+                                    formControlName="vlBeneficio">
+                            </mat-form-field>
+
+                            <mat-checkbox formControlName="lgNis" color="primary">Família com CAD-ÚNICO</mat-checkbox>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>NIS</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nrNis">
+                            </mat-form-field>
+                        </div>
+
 
                         <mat-action-row>
                             <button mat-button type="button" color="warn" (click)="prevStep()">Anterior</button>
@@ -226,6 +255,72 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
 
+                        <!-- ln1 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Situação Habitacional</mat-label>
+                                <mat-select formControlName="tpSituacao"
+                                    (selectionChange)="onChangeSituacaoHabitacional($event)">
+                                    <mat-option *ngFor="let item of situacaoHabitacional" [value]="item.id">
+                                        {{item.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex="20" appearance="fill" *ngIf="lgHabitacaoAluguel">
+                                <mat-label>Valor</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number"
+                                    formControlName="vlAluguel">
+                            </mat-form-field>
+                            <mat-form-field fxFlex="10" appearance="fill">
+                                <mat-label>Nº de Cômodos</mat-label>
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number"
+                                    formControlName="nrComodos">
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Iluminação</mat-label>
+                                <mat-select formControlName="tpIluminacao">
+                                    <mat-option *ngFor="let item of iluminacao" [value]="item.id">
+                                        {{item.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <!-- ln2 -->
+                        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Abastecimento de Água</mat-label>
+                                <mat-select formControlName="tpAbastecimento">
+                                    <mat-option *ngFor="let item of abastecimentoAgua" [value]="item.id">
+                                        {{item.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Tratamento de Água</mat-label>
+                                <mat-select formControlName="tpTratamentoAgua">
+                                    <mat-option *ngFor="let item of tratamentoAgua" [value]="item.id">
+                                        {{item.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Escoamento Sanitário</mat-label>
+                                <mat-select formControlName="tpEscoamentoSanitario">
+                                    <mat-option *ngFor="let item of escoamentoSanitario" [value]="item.id">
+                                        {{item.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field fxFlex appearance="fill">
+                                <mat-label>Destino do Lixo</mat-label>
+                                <mat-select formControlName="tpDestinoLixo">
+                                    <mat-option *ngFor="let item of destinoLixo" [value]="item.id">
+                                        {{item.label}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
 
                         <mat-action-row>
                             <button mat-button type="button" color="warn" (click)="prevStep()">Anterior</button>
@@ -244,6 +339,20 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
 
+                        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="30px"
+                            class="aluno-content"
+                            *ngFor="let formAluno of formGroup.value.alunos; let i = index" >
+                            <app-aluno-detail fxFlex [formGroup]="formAluno"></app-aluno-detail>
+                            <button mat-icon-button color="warn" matTooltip="Remover" (click)="delAluno(i)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-mini-fab color="primary" matTooltip="Adicionar aluno"
+                                (click)="addAluno()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
 
                         <mat-action-row>
                             <button type="button" mat-button color="warn" (click)="prevStep()">Anterior</button>

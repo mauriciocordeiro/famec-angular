@@ -29,6 +29,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 import { FamiliaComponent } from './components/familia/familia.component';
 import { FamiliaItemComponent } from './components/familia/familia-item/familia-item.component';
 import { FamiliaDetailComponent } from './components/familia/familia-detail/familia-detail.component';
+import { AlunoDetailComponent } from './components/aluno/aluno-detail/aluno-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { FamiliaDetailComponent } from './components/familia/familia-detail/fami
     UsuarioItemListComponent,
     FamiliaComponent,
     FamiliaItemComponent,
-    FamiliaDetailComponent
+    FamiliaDetailComponent,
+    AlunoDetailComponent
   ],
   imports: [
     BrowserModule,

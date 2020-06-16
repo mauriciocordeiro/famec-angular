@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Familia } from 'src/app/model/familia';
 import { UserRole } from 'src/app/enum/user-role.enum';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SnackBarService } from 'src/app/core/services/snackbar.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FamiliaService } from 'src/app/services/familia.service';
 import { DateAdapter } from '@angular/material/core';
+import { Aluno } from 'src/app/model/aluno';
+import { Situacao } from 'src/app/enum/situacao.enum';
 
 @Component({
   selector: 'app-familia-detail',
@@ -36,7 +38,7 @@ export class FamiliaDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this._adapter.setLocale("pt-br");
-    
+
     this.formGroup = this.buildFormGroup(new Familia());
     this.loadFamilia();
   }
@@ -49,7 +51,6 @@ export class FamiliaDetailComponent implements OnInit {
           familia => {
             this.familia = familia;
             this.formGroup = this.buildFormGroup(this.familia);
-            console.log(familia)
           },
           err => {
             let error = err.error;
@@ -68,9 +69,99 @@ export class FamiliaDetailComponent implements OnInit {
     this.lgHabitacaoAluguel = event.value === 2; //Alugada
   }
 
+  addAluno() {
+    this.formGroup.value.alunos.push(this.buildAlunoFormGroup(new Aluno()));
+  }
+
+  delAluno(index) {
+    this.formGroup.value.alunos.splice(index, 1);
+  }
+
+  onSubmit() {
+    console.log('Família:', this.buildObject(this.formGroup));
+    // if(this.formGroup.invalid) {
+    //   this.snackBar.alert('Existem campos inválidos');
+    //   return;
+    // }
+
+    let familia: Familia = this.buildObject(this.formGroup);
+    familia.habitacao = null;
+    familia.perfilSocial = null;
+
+    this.familiaService.save(familia)
+      .subscribe(
+        familia => {
+          this.snackBar.success('Salvo com sucesso');
+          this.familia = familia;
+          this.formGroup = this.buildFormGroup(this.familia);
+        },
+        err => {
+          let error = err.error;
+          this.snackBar.error(error.message, error.status);
+        }
+      )
+  }
+
+  buildObject(formGroup: FormGroup): Familia {
+    let familia = new Familia();
+    let form = formGroup.getRawValue();
+
+    // familia
+    familia.cdFamilia = form.cdFamilia;
+    familia.cdUsuarioCadastro = this.authService.getUser().cdUsuario;
+    familia.dtCadastro = (form.dtCadastro || new Date());
+    familia.nrProntuario = form.nrProntuario;
+    
+    // responsavel
+    familia.responsavel.cdResponsavel = form.cdResponsavel;
+    familia.responsavel.nmResponsavel = form.nmResponsavel;
+    familia.responsavel.tpParentesco = form.tpParentesco;
+    familia.responsavel.tpGenero = form.tpGenero;
+    familia.responsavel.dtNascimento = form.dtNascimento 
+    familia.responsavel.nmNaturalidade = form.nmNaturalidade
+    familia.responsavel.tpEstadoCivil = form.tpEstadoCivil
+    familia.responsavel.nrTelefone1 = form.nrTelefone1
+    familia.responsavel.nrTelefone2 = form.nrTelefone2
+    familia.responsavel.nrRg = form.nrRg
+    familia.responsavel.nmOrgaoExpedidorRg = form.nmOrgaoExpedidorRg
+    familia.responsavel.sgUfRg = form.sgUfRg
+    familia.responsavel.nrCpf = form.nrCpf;
+    familia.responsavel.dsEscolaridade = form.dsEscolaridade;
+    familia.responsavel.lgEstudante = form.lgEstudante;
+    familia.responsavel.tpNivelEscolar = form.tpNivelEscolar;
+    familia.responsavel.tpTurno = form.tpTurno;
+    familia.responsavel.nmOcupacao = form.nmOcupacao;
+    familia.responsavel.vlRendaMensal = form.vlRendaMensal;
+    familia.responsavel.nmLocalTrabalho  = form.nmLocalTrabalho;
+    familia.responsavel.nrTelefoneTrabalho = form.nrTelefoneTrabalho;
+
+    // endereco
+    familia.responsavel.enderecoResponsavel.cdEnderecoResponsavel = form.cdEnderecoResponsavel;
+    familia.responsavel.enderecoResponsavel.nmRua = form.nmRua;
+    familia.responsavel.enderecoResponsavel.nrCasa = form.nrCasa;
+    familia.responsavel.enderecoResponsavel.nmComplemento = form.nmComplemento;
+    familia.responsavel.enderecoResponsavel.nmBairro = form.nmBairro;
+    familia.responsavel.enderecoResponsavel.nmCidade = form.nmCidade;
+    familia.responsavel.enderecoResponsavel.nmEstado = form.nmEstado;
+
+    // perfil social
+    
+
+    // habitacao
+
+
+    // alunos
+    form.alunos.forEach(formAluno => {
+      let aluno = formAluno.getRawValue();
+      aluno.stAluno = formAluno.getRawValue().stAluno ? 1 : 0;
+      familia.alunos.push(aluno);
+    });
+
+    return familia;
+  }
 
   buildFormGroup(familia: Familia): FormGroup {
-    return new FormGroup({
+    let form =  new FormGroup({
       cdFamilia: new FormControl(familia.cdFamilia),
       dtCadastro: new FormControl(familia.dtCadastro),
       nrProntuario: new FormControl(familia.nrProntuario),
@@ -89,7 +180,7 @@ export class FamiliaDetailComponent implements OnInit {
       nmOrgaoExpedidorRg: new FormControl(familia.responsavel.nmOrgaoExpedidorRg),
       sgUfRg: new FormControl(familia.responsavel.sgUfRg),
       nrCpf: new FormControl(familia.responsavel.nrCpf),
-      dsEscolaridade: new FormControl(familia.responsavel.dsEsclaridade),
+      dsEscolaridade: new FormControl(familia.responsavel.dsEscolaridade),
       lgEstudante: new FormControl(familia.responsavel.lgEstudante),
       tpNivelEscolar: new FormControl(familia.responsavel.tpNivelEscolar),
       tpTurno: new FormControl(familia.responsavel.tpTurno),
@@ -105,6 +196,61 @@ export class FamiliaDetailComponent implements OnInit {
       nmBairro: new FormControl(familia.responsavel.enderecoResponsavel.nmBairro),
       nmCidade: new FormControl(familia.responsavel.enderecoResponsavel.nmCidade),
       nmEstado: new FormControl(familia.responsavel.enderecoResponsavel.nmEstado),
+
+      cdPerfilSocial: new FormControl(familia.perfilSocial.cdPerfilSocial),
+      lgNis: new FormControl(familia.perfilSocial.lgNis),
+      nrNis: new FormControl(familia.perfilSocial.nrNis),
+      lgBeneficio: new FormControl(familia.perfilSocial.lgBeneficio),
+      nmBeneficio: new FormControl(familia.perfilSocial.nmBeneficio),
+      vlBeneficio: new FormControl(familia.perfilSocial.nmBeneficio),
+
+      cdHabitacao: new FormControl(familia.habitacao.cdHabitacao),
+      tpSituacao: new FormControl(familia.habitacao.tpSituacao),
+      vlAluguel: new FormControl(familia.habitacao.vlAluguel),
+      nrComodos: new FormControl(familia.habitacao.nrComodos),
+      tpAbastecimento: new FormControl(familia.habitacao.tpAbastrcimento),
+      tpTratamentoAgua: new FormControl(familia.habitacao.tpTratamentoAgua),
+      tpIluminacao: new FormControl(familia.habitacao.tpIluminacao),
+      tpEscoamentoSanitario: new FormControl(familia.habitacao.tpEscoamentoSanitario),
+      tpDestinoLixo: new FormControl(familia.habitacao.tpDestinoLixo),
+
+      alunos: new FormControl([])
+    });
+
+    familia.alunos.forEach(aluno => {
+      form.value.alunos.push(this.buildAlunoFormGroup(aluno));
+    });
+
+    return form;
+  }
+
+  buildAlunoFormArray(alunos: Aluno[]): FormArray {
+    let array = new FormArray([]);
+    alunos.forEach(aluno => {
+      array.push(this.buildAlunoFormGroup(aluno));
+    });
+    return array;
+  }
+
+  buildAlunoFormGroup(aluno: Aluno) : FormGroup {
+    return new FormGroup({
+      cdAluno: new FormControl(aluno.cdAluno),
+      cdFamilia: new FormControl(aluno.cdFamilia),
+      nmAluno: new FormControl(aluno.nmAluno),
+      dtNascimento: new FormControl(aluno.dtNascimento),
+      //nrIdade: new FormControl(register ? Utils.getAge(new Date(register.DT_NASCIMENTO)) : ''),
+      tpSexo: new FormControl(aluno.tpSexo),
+      nmNaturalidade: new FormControl(aluno.nmNaturalidade),
+      nmEscola: new FormControl(aluno.nmEscola),
+      nrNivelEscolar: new FormControl(aluno.nrNivelEscolar),
+      tpModalidadeEscolar: new FormControl(aluno.tpModalidadeEscolar),
+      tpHorarioEscolar: new FormControl(aluno.tpHorarioEscolar),
+      tpTurnoFamec: new FormControl(aluno.tpTurnoFamec),
+      stAluno: new FormControl(aluno.stAluno || Situacao.ATIVO),
+      hrSaida: new FormControl(aluno.hrSaida),
+      lgAcompanhanteSaida: new FormControl(aluno.lgAcompanhanteSaida),
+      nmAcompanhanteSaida: new FormControl(aluno.nmAcompanhanteSaida),
+      lgAlmocoInstituicao: new FormControl(aluno.lgAlmocoInstituicao)
     });
   }
 
