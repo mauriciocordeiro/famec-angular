@@ -4,7 +4,7 @@ export class Habitacao {
     tpSituacao:number;
     vlAluguel:number;
     nrComodos:number;
-    tpAbastrcimento:number;
+    tpAbastecimento:number;
     tpTratamentoAgua:number;
     tpIluminacao:number;
     tpEscoamentoSanitario:number;

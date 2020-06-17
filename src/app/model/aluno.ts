@@ -12,7 +12,7 @@ export class Aluno {
   tpHorarioEscolar:number;
   tpTurnoFamec:number;
   stAluno:number;
-  hrSaida:Date;
+  hrSaida:any;
   lgAcompanhanteSaida:number;
   nmAcompanhanteSaida:string;
   lgAlmocoInstituicao:number;

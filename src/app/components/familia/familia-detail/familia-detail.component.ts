@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Familia } from 'src/app/model/familia';
 import { UserRole } from 'src/app/enum/user-role.enum';
-import { FormGroup, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { SnackBarService } from 'src/app/core/services/snackbar.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -96,7 +96,7 @@ export class FamiliaDetailComponent implements OnInit {
           this.formGroup = this.buildFormGroup(this.familia);
         },
         err => {
-          let error = err.error;
+          let error = err.error || { status: err.status, message: "Erro!"};
           this.snackBar.error(error.message, error.status);
         }
       )
@@ -127,7 +127,7 @@ export class FamiliaDetailComponent implements OnInit {
     familia.responsavel.sgUfRg = form.sgUfRg
     familia.responsavel.nrCpf = form.nrCpf;
     familia.responsavel.dsEscolaridade = form.dsEscolaridade;
-    familia.responsavel.lgEstudante = form.lgEstudante;
+    familia.responsavel.lgEstudante = (form.lgEstudante ? 1 : 0);
     familia.responsavel.tpNivelEscolar = form.tpNivelEscolar;
     familia.responsavel.tpTurno = form.tpTurno;
     familia.responsavel.nmOcupacao = form.nmOcupacao;
@@ -145,15 +145,35 @@ export class FamiliaDetailComponent implements OnInit {
     familia.responsavel.enderecoResponsavel.nmEstado = form.nmEstado;
 
     // perfil social
-    
+    familia.perfilSocial.cdPerfilSocial = form.cdPerfilSocial;
+    familia.perfilSocial.lgNis = (form.lgNis ? 1 : 0);
+    familia.perfilSocial.nrNis = form.nrNis;
+    familia.perfilSocial.lgBeneficio = (form.lgBeneficio ? 1 : 0);
+    familia.perfilSocial.nmBeneficio = form.nmBeneficio;
+    familia.perfilSocial.vlBeneficio = form.vlBeneficio;    
 
     // habitacao
-
+    familia.habitacao.cdHabitacao = form.cdHabitacao;
+    familia.habitacao.tpSituacao = form.tpSituacao;
+    familia.habitacao.vlAluguel = form.vlAluguel;
+    familia.habitacao.nrComodos = form.nrComodos;
+    familia.habitacao.tpAbastecimento = form.tpAbastecimento;
+    familia.habitacao.tpTratamentoAgua = form.tpTratamentoAgua;
+    familia.habitacao.tpIluminacao = form.tpIluminacao;
+    familia.habitacao.tpEscoamentoSanitario = form.tpEscoamentoSanitario;
+    familia.habitacao.tpDestinoLixo = form.tpDestinoLixo;
 
     // alunos
     form.alunos.forEach(formAluno => {
       let aluno = formAluno.getRawValue();
-      aluno.stAluno = formAluno.getRawValue().stAluno ? 1 : 0;
+      aluno.stAluno = (aluno.stAluno ? Situacao.ATIVO : Situacao.INATIVO);
+      aluno.lgAcompanhanteSaida = (aluno.lgAcompanhanteSaida ? 1 : 0);
+      aluno.lgAlmocoInstituicao = (aluno.lgAlmocoInstituicao ? 1 : 0);
+
+      let hrSaida: Date = new Date();
+      hrSaida.setHours(aluno.hrSaida.split(':')[0], aluno.hrSaida.split(':')[1]); 
+      hrSaida.setHours(hrSaida.getHours()-3);
+      aluno.hrSaida = hrSaida;     
       familia.alunos.push(aluno);
     });
 
@@ -164,11 +184,11 @@ export class FamiliaDetailComponent implements OnInit {
     let form =  new FormGroup({
       cdFamilia: new FormControl(familia.cdFamilia),
       dtCadastro: new FormControl(familia.dtCadastro),
-      nrProntuario: new FormControl(familia.nrProntuario),
+      nrProntuario: new FormControl(familia.nrProntuario, Validators.required),
       cdUsuarioCadastro: new FormControl(familia.cdUsuarioCadastro),
 
       cdResponsavel: new FormControl(familia.responsavel.cdResponsavel),
-      nmResponsavel: new FormControl(familia.responsavel.nmResponsavel),
+      nmResponsavel: new FormControl(familia.responsavel.nmResponsavel, Validators.required),
       tpParentesco: new FormControl(familia.responsavel.tpParentesco),
       tpGenero: new FormControl(familia.responsavel.tpGenero),
       dtNascimento: new FormControl(familia.responsavel.dtNascimento),
@@ -179,7 +199,7 @@ export class FamiliaDetailComponent implements OnInit {
       nrRg: new FormControl(familia.responsavel.nrRg),
       nmOrgaoExpedidorRg: new FormControl(familia.responsavel.nmOrgaoExpedidorRg),
       sgUfRg: new FormControl(familia.responsavel.sgUfRg),
-      nrCpf: new FormControl(familia.responsavel.nrCpf),
+      nrCpf: new FormControl(familia.responsavel.nrCpf, Validators.required),
       dsEscolaridade: new FormControl(familia.responsavel.dsEscolaridade),
       lgEstudante: new FormControl(familia.responsavel.lgEstudante),
       tpNivelEscolar: new FormControl(familia.responsavel.tpNivelEscolar),
@@ -208,7 +228,7 @@ export class FamiliaDetailComponent implements OnInit {
       tpSituacao: new FormControl(familia.habitacao.tpSituacao),
       vlAluguel: new FormControl(familia.habitacao.vlAluguel),
       nrComodos: new FormControl(familia.habitacao.nrComodos),
-      tpAbastecimento: new FormControl(familia.habitacao.tpAbastrcimento),
+      tpAbastecimento: new FormControl(familia.habitacao.tpAbastecimento),
       tpTratamentoAgua: new FormControl(familia.habitacao.tpTratamentoAgua),
       tpIluminacao: new FormControl(familia.habitacao.tpIluminacao),
       tpEscoamentoSanitario: new FormControl(familia.habitacao.tpEscoamentoSanitario),
@@ -236,8 +256,8 @@ export class FamiliaDetailComponent implements OnInit {
     return new FormGroup({
       cdAluno: new FormControl(aluno.cdAluno),
       cdFamilia: new FormControl(aluno.cdFamilia),
-      nmAluno: new FormControl(aluno.nmAluno),
-      dtNascimento: new FormControl(aluno.dtNascimento),
+      nmAluno: new FormControl(aluno.nmAluno, Validators.required),
+      dtNascimento: new FormControl(aluno.dtNascimento, Validators.required),
       //nrIdade: new FormControl(register ? Utils.getAge(new Date(register.DT_NASCIMENTO)) : ''),
       tpSexo: new FormControl(aluno.tpSexo),
       nmNaturalidade: new FormControl(aluno.nmNaturalidade),
@@ -246,7 +266,7 @@ export class FamiliaDetailComponent implements OnInit {
       tpModalidadeEscolar: new FormControl(aluno.tpModalidadeEscolar),
       tpHorarioEscolar: new FormControl(aluno.tpHorarioEscolar),
       tpTurnoFamec: new FormControl(aluno.tpTurnoFamec),
-      stAluno: new FormControl(aluno.stAluno || Situacao.ATIVO),
+      stAluno: new FormControl(aluno.stAluno),
       hrSaida: new FormControl(aluno.hrSaida),
       lgAcompanhanteSaida: new FormControl(aluno.lgAcompanhanteSaida),
       nmAcompanhanteSaida: new FormControl(aluno.nmAcompanhanteSaida),

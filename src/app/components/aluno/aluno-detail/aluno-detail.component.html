@@ -7,7 +7,12 @@
                 <input oninput="this.value = this.value.toUpperCase()" matInput required formControlName="nmAluno"
                     placeholder="Pedro de Alcântara Francisco de Bragança e Bourbon">
             </mat-form-field>
-            <mat-slide-toggle color="primary" formControlName="stAluno">Ativo</mat-slide-toggle>
+            <mat-form-field fxFlex.xs="10" appearance="fill">
+                <mat-label>Situação</mat-label>
+                <mat-select matNativeControl required formControlName="stAluno">
+                    <mat-option *ngFor="let element of situacoes" [value]="element.value">{{ element.key }}</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
 
         <!-- ln2 -->
@@ -86,8 +91,8 @@
             </mat-checkbox>
             <mat-form-field fxFlex="15" appearance="fill">
                 <mat-label>Saída da FAMEC</mat-label>
-                <input oninput="this.value = this.value.toUpperCase()" matInput type="text" formControlName="hrSaida"
-                    placeholder="--:--" [ngModel]="this.formGroup.value.hrSaida | date:'HH:mm'">
+                <input matInput type="datetime" formControlName="hrSaida"
+                    [ngModel]="this.formGroup.value.hrSaida | date:'HH:mm'">
             </mat-form-field>
             <mat-checkbox formControlName="lgAcompanhanteSaida" color="primary">
                 Acompanhado

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Situacao } from 'src/app/enum/situacao.enum';
 
 @Component({
   selector: 'app-aluno-detail',
@@ -45,6 +46,11 @@ export class AlunoDetailComponent implements OnInit {
   sexo = [
     { id: 1, label: 'MASCULINO' },
     { id: 2, label: 'FEMININO' }
+  ];
+  
+  situacoes = [
+    { key: "ATIVO", value: Situacao.ATIVO },
+    { key: "INATIVO", value: Situacao.INATIVO }
   ];
 
 }
