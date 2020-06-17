@@ -1,0 +1,106 @@
+<mat-card class="main">
+    <form [formGroup]="formGroup">
+        <!-- ln1 -->
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <mat-form-field fxFlex appearance="fill">
+                <mat-label>Nome</mat-label>
+                <input oninput="this.value = this.value.toUpperCase()" matInput required formControlName="nmAluno"
+                    placeholder="Pedro de Alcântara Francisco de Bragança e Bourbon">
+            </mat-form-field>
+            <mat-form-field fxFlex.xs="10" appearance="fill">
+                <mat-label>Situação</mat-label>
+                <mat-select matNativeControl required formControlName="stAluno">
+                    <mat-option *ngFor="let element of situacoes" [value]="element.value">{{ element.key }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- ln2 -->
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <mat-form-field fxFlex="15" appearance="fill">
+                <mat-label>Data de nascimento</mat-label>
+                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="dtNascimento"
+                    [matDatepicker]="dtNascPicker" placeholder="Data de nascimento" required>
+                <mat-datepicker-toggle matSuffix [for]="dtNascPicker"></mat-datepicker-toggle>
+                <mat-datepicker #dtNascPicker></mat-datepicker>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="fill">
+                <mat-label>Idade</mat-label>
+                <input oninput="this.value = this.value.toUpperCase()"  matInput #nrIdade type="number" formControlName="nrIdade">
+              </mat-form-field> -->
+            <mat-form-field fxFlex="20" appearance="fill">
+                <mat-label>Sexo</mat-label>
+                <mat-select formControlName="tpSexo">
+                    <mat-option *ngFor="let item of sexo" [value]="item.id">
+                        {{item.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex appearance="fill">
+                <mat-label>Naturalidade</mat-label>
+                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nmNaturalidade"
+                    placeholder="Vitória da Conquista - BA">
+            </mat-form-field>
+        </div>
+
+        <!-- ln3 -->
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <mat-form-field fxFlex appearance="fill">
+                <mat-label>Escola</mat-label>
+                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nmEscola">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="7" appearance="fill">
+                <mat-label>Nível</mat-label>
+                <mat-select formControlName="nrNivelEscolar">
+                    <mat-option *ngFor="let nivel of nivelEscolar" [value]="nivel.id">
+                        {{nivel.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="15" appearance="fill">
+                <mat-label>Modalidade</mat-label>
+                <mat-select formControlName="tpModalidadeEscolar">
+                    <mat-option *ngFor="let mod of modalidadeEscolar" [value]="mod.id">
+                        {{mod.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="15" appearance="fill">
+                <mat-label>Horário Escolar</mat-label>
+                <mat-select formControlName="tpHorarioEscolar">
+                    <mat-option *ngFor="let hrEscola of horarioEscolar" [value]="hrEscola.id">
+                        {{hrEscola.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field fxFlex="15" appearance="fill">
+                <mat-label>Horário FAMEC</mat-label>
+                <mat-select formControlName="tpTurnoFamec">
+                    <mat-option *ngFor="let hrInstituicao of horarioInstituicao" [value]="hrInstituicao.id">
+                        {{hrInstituicao.label}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- ln4 -->
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+            <mat-checkbox formControlName="lgAlmocoInstituicao" color="primary">
+                Almoço na Instituição
+            </mat-checkbox>
+            <mat-form-field fxFlex="15" appearance="fill">
+                <mat-label>Saída da FAMEC</mat-label>
+                <input matInput type="datetime" formControlName="hrSaida"
+                    [ngModel]="this.formGroup.value.hrSaida | date:'HH:mm'">
+            </mat-form-field>
+            <mat-checkbox formControlName="lgAcompanhanteSaida" color="primary">
+                Acompanhado
+            </mat-checkbox>
+            <mat-form-field fxFlex appearance="fill">
+                <mat-label>Acompanhante</mat-label>
+                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nmAcompanhanteSaida">
+            </mat-form-field>
+        </div>
+    </form>
+</mat-card>

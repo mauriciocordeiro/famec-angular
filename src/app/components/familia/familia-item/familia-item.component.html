@@ -1,0 +1,13 @@
+<mat-list>
+    <mat-list-item>
+        <div mat-line><strong>{{familia.nrProntuario}}</strong></div>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['/familias/familia', familia.cdFamilia]">Ver</button>
+          </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon color="accent">more_vert</mat-icon>
+        </button>
+    </mat-list-item>
+</mat-list>
+<mat-divider></mat-divider>

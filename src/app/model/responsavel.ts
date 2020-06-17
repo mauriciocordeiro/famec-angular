@@ -15,7 +15,7 @@ export class Responsavel {
     nmOrgaoExpedidorRg:string;
     sgUfRg:string;
     nrCpf:string;
-    dsEsclaridade:string;
+    dsEscolaridade:string;
     lgEstudante:number;
     tpNivelEscolar:number;
     tpTurno:number;
@@ -25,4 +25,8 @@ export class Responsavel {
     nrTelefoneTrabalho:string;
 
     enderecoResponsavel:EnderecoResponsavel;
+
+    constructor() {
+        this.enderecoResponsavel = new EnderecoResponsavel();
+    }
 }

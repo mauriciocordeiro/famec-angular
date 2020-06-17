@@ -5,7 +5,6 @@ import { ThemeService } from './core/services/theme.service';
 import { Usuario } from './model/usuario';
 import { MatDrawer } from '@angular/material/sidenav';
 import { LoaderService } from './core/services/loader.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',

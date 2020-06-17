@@ -1,0 +1,37 @@
+.main {
+    position: relative;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 64px);
+    padding-top: 10px;
+}
+
+#add-button {
+    bottom: 10px; 
+    right: 30px;
+    position: fixed;
+}
+
+table {
+    text-align: left;
+    width: 100%;
+}  
+
+td {
+    font-size: 12px;
+}
+
+.inner-line {
+    padding-right: 10px;
+}
+
+/* ng-container, tr {
+    padding-right: 15px;
+} */
+
+.search {
+    width: 100%;
+}
+
+.search-btn {
+    margin-top: 10px;
+}
