@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiFamec: "https://famec.herokuapp.com/v1"
+  apiFamec: "http://localhost:8080/v1"
 };
 
 /*

@@ -5,7 +5,7 @@ import { PerfilSocial } from './perfil-social';
 
 export class Familia {
     cdFamilia:number;
-    dtCadastro:number;
+    dtCadastro:Date;
     cdUsuarioCadastro:number;
     nrProntuario:string;
 
@@ -13,4 +13,11 @@ export class Familia {
     responsavel:Responsavel;
     habitacao:Habitacao;
     perfilSocial:PerfilSocial;
+
+    constructor() {
+        this.responsavel = new Responsavel();
+        this.habitacao = new Habitacao();
+        this.perfilSocial = new PerfilSocial();
+        this.alunos = [];
+    }
 }

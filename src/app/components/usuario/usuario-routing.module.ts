@@ -8,7 +8,7 @@ import { UsuarioDetailComponent } from './usuario-detail/usuario-detail.componen
 const routes: Routes = [
   { path: '', component: UsuarioComponent, canActivate: [AuthGuard] },
   { path: 'usuario', component: UsuarioDetailComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Usuário' } },
-  { path: 'usuario/:id', component: UsuarioDetailComponent, canActivate: [AuthGuard] }
+  { path: 'usuario/:id', component: UsuarioDetailComponent, canActivate: [AuthGuard], data: { breadcrumb: 'Usuário' } }
 ];
 
 @NgModule({

@@ -23,6 +23,11 @@ export class UsuarioDetailComponent implements OnInit {
     { key: "ADMIN", value: UserRole.ADMIN }
   ];
 
+  situacoes = [
+    { key: "ATIVO", value: Situacao.ATIVO},
+    { key: "INATIVO", value: Situacao.INATIVO}
+  ];
+
   formGroup:FormGroup;
 
   @ViewChild('nmSenhaConfirm') nmSenhaConfirm: ElementRef;
@@ -70,7 +75,9 @@ export class UsuarioDetailComponent implements OnInit {
       return;
     }
 
-    this.usuarioService.save(this.formGroup.getRawValue()).subscribe(
+    let usuario = this.formGroup.getRawValue();
+    usuario.stUsuario = (usuario.stUsuario ? Situacao.ATIVO : Situacao.INATIVO);
+    this.usuarioService.save(usuario).subscribe(
       usuario => {
         this.usuario = usuario;
         this.formGroup = this.buildFormGroup(this.usuario);
@@ -87,7 +94,7 @@ export class UsuarioDetailComponent implements OnInit {
     return new FormGroup({
         cdUsuario: new FormControl(usuario.cdUsuario),
         nmUsuario: new FormControl(usuario.nmUsuario, [Validators.required]),
-        stUsuario: new FormControl(usuario.stUsuario || Situacao.ATIVO),
+        stUsuario: new FormControl(usuario.stUsuario),
         nmLogin: new FormControl(usuario.nmLogin, [Validators.required]),
         nmSenha: new FormControl(usuario.nmSenha, [Validators.required]),
         nmEmail: new FormControl(usuario.nmEmail),
