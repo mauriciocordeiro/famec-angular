@@ -26,6 +26,7 @@
     "@auth0/angular-jwt": "^4.1.2",
     "moment": "^2.26.0",
     "ngx-gravatar": "^9.0.1",
+    "ngx-mask": "^11.1.4",
     "rxjs": "^6.5.5",
     "ts-md5": "^1.2.7",
     "tslib": "^1.10.0",

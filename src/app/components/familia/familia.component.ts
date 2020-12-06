@@ -3,7 +3,6 @@ import { FamiliaService } from 'src/app/services/familia.service';
 import { SnackBarService } from 'src/app/core/services/snackbar.service';
 import { Familia } from 'src/app/model/familia';
 import * as moment from 'moment';
-import { Turno as TurnoEnum } from 'src/app/enum/turno.enum';
 
 @Component({
   selector: 'app-familia',

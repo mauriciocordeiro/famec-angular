@@ -16,5 +16,6 @@ export class Aluno {
   lgAcompanhanteSaida:number;
   nmAcompanhanteSaida:string;
   lgAlmocoInstituicao:number;
+  dsHrSaida:string;
 
 }

@@ -30,6 +30,9 @@ import { FamiliaComponent } from './components/familia/familia.component';
 import { FamiliaItemComponent } from './components/familia/familia-item/familia-item.component';
 import { FamiliaDetailComponent } from './components/familia/familia-detail/familia-detail.component';
 import { AlunoDetailComponent } from './components/aluno/aluno-detail/aluno-detail.component';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [
@@ -58,6 +61,7 @@ import { AlunoDetailComponent } from './components/aluno/aluno-detail/aluno-deta
 
     GravatarModule,
     BreadcrumbModule,
+    NgxMaskModule.forRoot(),
     
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

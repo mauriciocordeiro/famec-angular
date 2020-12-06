@@ -78,15 +78,12 @@ export class FamiliaDetailComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Família:', this.buildObject(this.formGroup));
-    // if(this.formGroup.invalid) {
-    //   this.snackBar.alert('Existem campos inválidos');
-    //   return;
-    // }
+    if(this.formGroup.invalid) {
+      this.snackBar.alert('Existem campos inválidos');
+      return;
+    }
 
     let familia: Familia = this.buildObject(this.formGroup);
-    familia.habitacao = null;
-    familia.perfilSocial = null;
 
     this.familiaService.save(familia)
       .subscribe(
@@ -111,6 +108,7 @@ export class FamiliaDetailComponent implements OnInit {
     familia.cdUsuarioCadastro = this.authService.getUser().cdUsuario;
     familia.dtCadastro = (form.dtCadastro || new Date());
     familia.nrProntuario = form.nrProntuario;
+    debugger
     
     // responsavel
     familia.responsavel.cdResponsavel = form.cdResponsavel;
@@ -134,6 +132,7 @@ export class FamiliaDetailComponent implements OnInit {
     familia.responsavel.vlRendaMensal = form.vlRendaMensal;
     familia.responsavel.nmLocalTrabalho  = form.nmLocalTrabalho;
     familia.responsavel.nrTelefoneTrabalho = form.nrTelefoneTrabalho;
+    debugger
 
     // endereco
     familia.responsavel.enderecoResponsavel.cdEnderecoResponsavel = form.cdEnderecoResponsavel;
@@ -143,6 +142,7 @@ export class FamiliaDetailComponent implements OnInit {
     familia.responsavel.enderecoResponsavel.nmBairro = form.nmBairro;
     familia.responsavel.enderecoResponsavel.nmCidade = form.nmCidade;
     familia.responsavel.enderecoResponsavel.nmEstado = form.nmEstado;
+    debugger
 
     // perfil social
     familia.perfilSocial.cdPerfilSocial = form.cdPerfilSocial;
@@ -151,6 +151,7 @@ export class FamiliaDetailComponent implements OnInit {
     familia.perfilSocial.lgBeneficio = (form.lgBeneficio ? 1 : 0);
     familia.perfilSocial.nmBeneficio = form.nmBeneficio;
     familia.perfilSocial.vlBeneficio = form.vlBeneficio;    
+    debugger
 
     // habitacao
     familia.habitacao.cdHabitacao = form.cdHabitacao;
@@ -162,20 +163,18 @@ export class FamiliaDetailComponent implements OnInit {
     familia.habitacao.tpIluminacao = form.tpIluminacao;
     familia.habitacao.tpEscoamentoSanitario = form.tpEscoamentoSanitario;
     familia.habitacao.tpDestinoLixo = form.tpDestinoLixo;
+    debugger
 
     // alunos
     form.alunos.forEach(formAluno => {
-      let aluno = formAluno.getRawValue();
+      let aluno: Aluno = formAluno.getRawValue();
       aluno.stAluno = (aluno.stAluno ? Situacao.ATIVO : Situacao.INATIVO);
       aluno.lgAcompanhanteSaida = (aluno.lgAcompanhanteSaida ? 1 : 0);
       aluno.lgAlmocoInstituicao = (aluno.lgAlmocoInstituicao ? 1 : 0);
 
-      let hrSaida: Date = new Date();
-      hrSaida.setHours(aluno.hrSaida.split(':')[0], aluno.hrSaida.split(':')[1]); 
-      hrSaida.setHours(hrSaida.getHours()-3);
-      aluno.hrSaida = hrSaida;     
       familia.alunos.push(aluno);
     });
+    debugger
 
     return familia;
   }
@@ -222,7 +221,7 @@ export class FamiliaDetailComponent implements OnInit {
       nrNis: new FormControl(familia.perfilSocial.nrNis),
       lgBeneficio: new FormControl(familia.perfilSocial.lgBeneficio),
       nmBeneficio: new FormControl(familia.perfilSocial.nmBeneficio),
-      vlBeneficio: new FormControl(familia.perfilSocial.nmBeneficio),
+      vlBeneficio: new FormControl(familia.perfilSocial.vlBeneficio),
 
       cdHabitacao: new FormControl(familia.habitacao.cdHabitacao),
       tpSituacao: new FormControl(familia.habitacao.tpSituacao),
@@ -258,7 +257,6 @@ export class FamiliaDetailComponent implements OnInit {
       cdFamilia: new FormControl(aluno.cdFamilia),
       nmAluno: new FormControl(aluno.nmAluno, Validators.required),
       dtNascimento: new FormControl(aluno.dtNascimento, Validators.required),
-      //nrIdade: new FormControl(register ? Utils.getAge(new Date(register.DT_NASCIMENTO)) : ''),
       tpSexo: new FormControl(aluno.tpSexo),
       nmNaturalidade: new FormControl(aluno.nmNaturalidade),
       nmEscola: new FormControl(aluno.nmEscola),
@@ -270,7 +268,8 @@ export class FamiliaDetailComponent implements OnInit {
       hrSaida: new FormControl(aluno.hrSaida),
       lgAcompanhanteSaida: new FormControl(aluno.lgAcompanhanteSaida),
       nmAcompanhanteSaida: new FormControl(aluno.nmAcompanhanteSaida),
-      lgAlmocoInstituicao: new FormControl(aluno.lgAlmocoInstituicao)
+      lgAlmocoInstituicao: new FormControl(aluno.lgAlmocoInstituicao),
+      dsHrSaida: new FormControl(aluno.dsHrSaida)
     });
   }
 

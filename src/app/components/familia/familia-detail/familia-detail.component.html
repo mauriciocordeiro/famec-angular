@@ -100,12 +100,12 @@
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>Telefone 1</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                <input oninput="this.value = this.value.toUpperCase()" matInput mask="(99) 9999-9999"
                                     formControlName="nrTelefone1" placeholder="(77) 0000-0000">
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>Telefone 2</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                <input oninput="this.value = this.value.toUpperCase()" matInput mask="(99) 9999-9999"
                                     formControlName="nrTelefone2" placeholder="(77) 99191-9911">
                             </mat-form-field>
 
@@ -130,7 +130,7 @@
                             <mat-form-field fxFlex="20" appearance="fill">
                                 <mat-label>CPF</mat-label>
                                 <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nrCpf"
-                                    required placeholder="000.000.000-00">
+                                    required placeholder="000.000.000-00" mask="000.000.000-00">
                             </mat-form-field>
                         </div>
 
@@ -164,7 +164,8 @@
                             </mat-form-field>
                             <mat-form-field fxFlex="10" appearance="fill">
                                 <mat-label>Ano</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number">
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number"
+                                    mask="9999">
                             </mat-form-field>
                         </div>
 
@@ -177,7 +178,8 @@
                             </mat-form-field>
                             <mat-form-field fxFlex="10" appearance="fill">
                                 <mat-label>Renda mensal</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number"
+                                <input oninput="this.value = this.value.toUpperCase()" matInput 
+                                    type="text" mask="separator.2" thousandSeparator="."
                                     formControlName="vlRendaMensal">
                             </mat-form-field>
                             <mat-form-field fxFlex="30" appearance="fill">
@@ -226,7 +228,8 @@
                             </mat-form-field>
                             <mat-form-field fxFlex="15" appearance="fill">
                                 <mat-label>Valor</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number"
+                                <input oninput="this.value = this.value.toUpperCase()" matInput 
+                                    type="text" mask="separator.2" thousandSeparator="."
                                     formControlName="vlBeneficio">
                             </mat-form-field>
 
@@ -239,7 +242,7 @@
 
 
                         <mat-action-row>
-                            <button mat-button type="button" color="warn" (click)="prevStep()">Anterior</button>
+                            <button mat-button type="button" color="accent" (click)="prevStep()">Anterior</button>
                             <button mat-button type="button" color="primary" (click)="nextStep()">Próximo</button>
                         </mat-action-row>
                     </mat-expansion-panel>
@@ -323,7 +326,7 @@
                         </div>
 
                         <mat-action-row>
-                            <button mat-button type="button" color="warn" (click)="prevStep()">Anterior</button>
+                            <button mat-button type="button" color="accent" (click)="prevStep()">Anterior</button>
                             <button mat-button type="button" color="primary" (click)="nextStep()">Próximo</button>
                         </mat-action-row>
                     </mat-expansion-panel>
@@ -355,7 +358,7 @@
                         </div>
 
                         <mat-action-row>
-                            <button type="button" mat-button color="warn" (click)="prevStep()">Anterior</button>
+                            <button type="button" mat-button color="accent" (click)="prevStep()">Anterior</button>
                             <button type="button" mat-button color="primary" (click)="nextStep()">Fim</button>
                         </mat-action-row>
                     </mat-expansion-panel>

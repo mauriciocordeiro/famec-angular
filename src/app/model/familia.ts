@@ -9,7 +9,7 @@ export class Familia {
     cdUsuarioCadastro:number;
     nrProntuario:string;
 
-    alunos:Aluno[];
+    alunos:Array<Aluno>;
     responsavel:Responsavel;
     habitacao:Habitacao;
     perfilSocial:PerfilSocial;
@@ -18,6 +18,6 @@ export class Familia {
         this.responsavel = new Responsavel();
         this.habitacao = new Habitacao();
         this.perfilSocial = new PerfilSocial();
-        this.alunos = [];
+        this.alunos = new Array<Aluno>();
     }
 }

@@ -91,8 +91,7 @@
             </mat-checkbox>
             <mat-form-field fxFlex="15" appearance="fill">
                 <mat-label>Saída da FAMEC</mat-label>
-                <input matInput type="datetime" formControlName="hrSaida"
-                    [ngModel]="this.formGroup.value.hrSaida | date:'HH:mm'">
+                <input matInput type="text" formControlName="dsHrSaida" mask="Hh:m0" [leadZeroDateTime]="true">
             </mat-form-field>
             <mat-checkbox formControlName="lgAcompanhanteSaida" color="primary">
                 Acompanhado
