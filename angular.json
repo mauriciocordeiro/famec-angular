@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "famec-angular"
+  "defaultProject": "famec-angular",
+  "cli": {
+    "analytics": false
+  }
 }
