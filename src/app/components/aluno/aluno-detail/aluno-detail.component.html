@@ -50,7 +50,13 @@
         <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
             <mat-form-field fxFlex appearance="fill">
                 <mat-label>Escola</mat-label>
-                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nmEscola">
+                <input type="text" matInput oninput="this.value = this.value.toUpperCase()"
+                    formControlName="nmEscola" [matAutocomplete]="escolaAC">
+                <mat-autocomplete autoActiveFirstOption #escolaAC="matAutocomplete">
+                    <mat-option *ngFor="let escola of filteredEscolas | async" [value]="escola">
+                        {{escola}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
 
             <mat-form-field fxFlex="7" appearance="fill">

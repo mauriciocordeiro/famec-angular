@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { LoaderService } from 'src/app/core/services/loader.service';
 import { Situacao } from 'src/app/enum/situacao.enum';
+import { EscolaService } from 'src/app/services/escola.service';
 import { MunicipioService } from 'src/app/services/municipio.service';
 
 @Component({
@@ -19,8 +20,12 @@ export class AlunoDetailComponent implements OnInit {
   municipios: string[];
   filteredMunicipios: Observable<string[]>;
 
+  escolas: string[];
+  filteredEscolas: Observable<string[]>;
+
   constructor(
     private municipioService: MunicipioService,
+    private escolaService: EscolaService,
     private loaderService: LoaderService
   ) { }
 
@@ -31,6 +36,12 @@ export class AlunoDetailComponent implements OnInit {
     this.filteredMunicipios = this.formGroup.get('nmNaturalidade').valueChanges.pipe(
       startWith(''),
       map(value => this.municipioService.filter(value))
+    );
+
+    this.escolas = await this.escolaService.getAll();
+    this.filteredEscolas = this.formGroup.get('nmEscola').valueChanges.pipe(
+      startWith(''),
+      map(value => this.escolaService.filter(value))
     );
 
     

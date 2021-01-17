@@ -1,3 +1,5 @@
+import { Escola } from "./escola";
+
 export class Aluno {
 
   cdAluno:number;
@@ -17,5 +19,9 @@ export class Aluno {
   nmAcompanhanteSaida:string;
   lgAlmocoInstituicao:number;
   dsHrSaida:string;
+  escola:Escola;
 
+  constructor() {
+    this.escola = new Escola();
+  }
 }

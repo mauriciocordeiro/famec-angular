@@ -18,7 +18,7 @@ export class MunicipioService {
     this.loader.show()
     this.list = []
     this.http
-      .get<any>('https://servicodados.ibge.gov.br/api/v1/localidades/municipios?orderBy=nome')
+      .get<any>('assets/data/municipios.json')
       .subscribe(data => {
         data.forEach(item => {
           let n:string = `${item.nome} - ${item.microrregiao.mesorregiao.UF.sigla}`
