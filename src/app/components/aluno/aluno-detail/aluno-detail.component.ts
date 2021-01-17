@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { LoaderService } from 'src/app/core/services/loader.service';
 import { Situacao } from 'src/app/enum/situacao.enum';
+import { MunicipioService } from 'src/app/services/municipio.service';
 
 @Component({
   selector: 'app-aluno-detail',
@@ -11,9 +15,26 @@ export class AlunoDetailComponent implements OnInit {
 
   @Input('formGroup') formGroup: FormGroup;
 
-  constructor() { }
+  
+  municipios: string[];
+  filteredMunicipios: Observable<string[]>;
 
-  ngOnInit(): void {
+  constructor(
+    private municipioService: MunicipioService,
+    private loaderService: LoaderService
+  ) { }
+
+  async ngOnInit() {
+    this.loaderService.show();
+    
+    this.municipios = await this.municipioService.getAll();
+    this.filteredMunicipios = this.formGroup.get('nmNaturalidade').valueChanges.pipe(
+      startWith(''),
+      map(value => this.municipioService.filter(value))
+    );
+
+    
+    this.loaderService.hide();
   }
 
 

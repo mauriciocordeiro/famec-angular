@@ -25,6 +25,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatExpansionModule } from '@angular/material/expansion'; 
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 
 @NgModule({
    imports: [
@@ -53,6 +54,7 @@ import { MatNativeDateModule } from '@angular/material/core';
       MatExpansionModule,
       MatCheckboxModule,
       MatNativeDateModule,
+      MatAutocompleteModule,
    ],
    exports: [
       MatButtonModule,
@@ -78,7 +80,8 @@ import { MatNativeDateModule } from '@angular/material/core';
       MatProgressSpinnerModule,
       MatExpansionModule,
       MatCheckboxModule,
-      MatNativeDateModule
+      MatNativeDateModule,
+      MatAutocompleteModule,
    ],
    providers: [
       MatDatepickerModule,

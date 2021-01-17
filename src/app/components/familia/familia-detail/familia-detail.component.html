@@ -18,7 +18,7 @@
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
                             <mat-form-field fxFlex="10" appearance="fill">
                                 <mat-label>Prontuário</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput required
+                                <input oninput="this.value = this.value.toUpperCase()" matInput required mask="00000"
                                     formControlName="nrProntuario" placeholder="007">
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="fill">
@@ -77,14 +77,18 @@
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
                             <mat-form-field appearance="fill">
                                 <mat-label>Data de Nascimento</mat-label>
-                                <input matInput [matDatepicker]="dpDtNasc" formControlName="dtNascimento">
-                                <mat-datepicker-toggle matSuffix [for]="dpDtNasc"></mat-datepicker-toggle>
-                                <mat-datepicker #dpDtNasc></mat-datepicker>
+                                <input matInput formControlName="dtNascimento" mask="d0/M0/0000"
+                                    [leadZeroDateTime]="true">
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>Naturalidade</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput
-                                    formControlName="nmNaturalidade" placeholder="Vitória da Conquista - BA">
+                                <input type="text" placeholder="VITÓRIA DA CONQUISTA - BA" matInput oninput="this.value = this.value.toUpperCase()"
+                                    formControlName="nmNaturalidade" [matAutocomplete]="munAC">
+                                <mat-autocomplete autoActiveFirstOption #munAC="matAutocomplete">
+                                    <mat-option *ngFor="let municipio of filteredMunicipios | async" [value]="municipio">
+                                        {{municipio}}
+                                    </mat-option>
+                                </mat-autocomplete>
                             </mat-form-field>
                             <mat-form-field fxFlex="20" appearance="fill">
                                 <mat-label>Estado Civil</mat-label>
@@ -100,13 +104,15 @@
                         <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>Telefone 1</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput mask="(99) 9999-9999"
-                                    formControlName="nrTelefone1" placeholder="(77) 0000-0000">
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    mask="(00) 0000-0000||(00) 00000-0000" formControlName="nrTelefone1"
+                                    placeholder="(77) 0000-0000">
                             </mat-form-field>
                             <mat-form-field fxFlex appearance="fill">
                                 <mat-label>Telefone 2</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput mask="(99) 9999-9999"
-                                    formControlName="nrTelefone2" placeholder="(77) 99191-9911">
+                                <input oninput="this.value = this.value.toUpperCase()" matInput
+                                    mask="(00) 0000-0000||(00) 00000-0000" formControlName="nrTelefone2"
+                                    placeholder="(77) 99191-9911">
                             </mat-form-field>
 
                             <mat-form-field fxFlex="20" appearance="fill">
@@ -164,8 +170,7 @@
                             </mat-form-field>
                             <mat-form-field fxFlex="10" appearance="fill">
                                 <mat-label>Ano</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput type="number"
-                                    mask="9999">
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="text" mask="9999">
                             </mat-form-field>
                         </div>
 
@@ -178,8 +183,8 @@
                             </mat-form-field>
                             <mat-form-field fxFlex="10" appearance="fill">
                                 <mat-label>Renda mensal</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput 
-                                    type="text" mask="separator.2" thousandSeparator="."
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="text"
+                                    mask="separator.2" thousandSeparator="." prefix="R$ "
                                     formControlName="vlRendaMensal">
                             </mat-form-field>
                             <mat-form-field fxFlex="30" appearance="fill">
@@ -190,7 +195,8 @@
                             <mat-form-field fxFlex="10" appearance="fill">
                                 <mat-label>Telefone</mat-label>
                                 <input oninput="this.value = this.value.toUpperCase()" matInput
-                                    formControlName="nrTelefoneTrabalho" type="tel" placeholder="(77) 0000-0000">
+                                    mask="(00) 0000-0000||(00) 00000-0000" formControlName="nrTelefoneTrabalho"
+                                    type="tel" placeholder="(77) 0000-0000">
                             </mat-form-field>
                         </div>
 
@@ -228,9 +234,8 @@
                             </mat-form-field>
                             <mat-form-field fxFlex="15" appearance="fill">
                                 <mat-label>Valor</mat-label>
-                                <input oninput="this.value = this.value.toUpperCase()" matInput 
-                                    type="text" mask="separator.2" thousandSeparator="."
-                                    formControlName="vlBeneficio">
+                                <input oninput="this.value = this.value.toUpperCase()" matInput type="text"
+                                    mask="separator.2" thousandSeparator="." prefix="R$ " formControlName="vlBeneficio">
                             </mat-form-field>
 
                             <mat-checkbox formControlName="lgNis" color="primary">Família com CAD-ÚNICO</mat-checkbox>
@@ -342,16 +347,15 @@
                             </mat-panel-description>
                         </mat-expansion-panel-header>
 
-                        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="30px"
-                            class="aluno-content"
-                            *ngFor="let formAluno of formGroup.value.alunos; let i = index" >
+                        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="30px" class="aluno-content"
+                            *ngFor="let formAluno of formGroup.value.alunos; let i = index">
                             <app-aluno-detail fxFlex [formGroup]="formAluno"></app-aluno-detail>
                             <button mat-icon-button color="warn" matTooltip="Remover" (click)="delAluno(i)">
                                 <mat-icon>close</mat-icon>
                             </button>
                         </div>
                         <div fxLayout="row" fxLayoutAlign="center center">
-                            <button mat-mini-fab color="primary" matTooltip="Adicionar aluno"
+                            <button type="button" mat-mini-fab color="primary" matTooltip="Adicionar aluno"
                                 (click)="addAluno()">
                                 <mat-icon>add</mat-icon>
                             </button>

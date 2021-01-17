@@ -9,6 +9,9 @@ import { FamiliaService } from 'src/app/services/familia.service';
 import { DateAdapter } from '@angular/material/core';
 import { Aluno } from 'src/app/model/aluno';
 import { Situacao } from 'src/app/enum/situacao.enum';
+import { MunicipioService } from 'src/app/services/municipio.service';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-familia-detail',
@@ -17,6 +20,9 @@ import { Situacao } from 'src/app/enum/situacao.enum';
 })
 export class FamiliaDetailComponent implements OnInit {
   step = 0;
+
+  municipios: string[];
+  filteredMunicipios: Observable<string[]>;
 
   familia:Familia;
 
@@ -33,14 +39,21 @@ export class FamiliaDetailComponent implements OnInit {
     private familiaService: FamiliaService,
     private snackBar: SnackBarService,
     private authService: AuthService,
+    private municipioService: MunicipioService,
     private _adapter: DateAdapter<any>
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this._adapter.setLocale("pt-br");
 
     this.formGroup = this.buildFormGroup(new Familia());
     this.loadFamilia();
+
+    this.municipios = await this.municipioService.getAll();
+    this.filteredMunicipios = this.formGroup.get('nmNaturalidade').valueChanges.pipe(
+      startWith(''),
+      map(value => this.municipioService.filter(value))
+    );
   }
 
   loadFamilia() {

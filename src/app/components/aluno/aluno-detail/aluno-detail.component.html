@@ -20,9 +20,7 @@
             <mat-form-field fxFlex="15" appearance="fill">
                 <mat-label>Data de nascimento</mat-label>
                 <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="dtNascimento"
-                    [matDatepicker]="dtNascPicker" placeholder="Data de nascimento" required>
-                <mat-datepicker-toggle matSuffix [for]="dtNascPicker"></mat-datepicker-toggle>
-                <mat-datepicker #dtNascPicker></mat-datepicker>
+                    mask="d0/M0/0000" [leadZeroDateTime]="true" placeholder="Data de nascimento" required>
             </mat-form-field>
             <!-- <mat-form-field appearance="fill">
                 <mat-label>Idade</mat-label>
@@ -35,11 +33,16 @@
                         {{item.label}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field>            
             <mat-form-field fxFlex appearance="fill">
                 <mat-label>Naturalidade</mat-label>
-                <input oninput="this.value = this.value.toUpperCase()" matInput formControlName="nmNaturalidade"
-                    placeholder="Vitória da Conquista - BA">
+                <input type="text" placeholder="VITÓRIA DA CONQUISTA - BA" matInput oninput="this.value = this.value.toUpperCase()"
+                    formControlName="nmNaturalidade" [matAutocomplete]="munAC">
+                <mat-autocomplete autoActiveFirstOption #munAC="matAutocomplete">
+                    <mat-option *ngFor="let municipio of filteredMunicipios | async" [value]="municipio">
+                        {{municipio}}
+                    </mat-option>
+                </mat-autocomplete>
             </mat-form-field>
         </div>
 

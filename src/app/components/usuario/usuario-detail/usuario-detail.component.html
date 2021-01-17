@@ -34,7 +34,8 @@
                 <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
                     <mat-form-field fxFlex appearance="fill">
                         <mat-label>E-mail</mat-label>
-                        <input matInput type="email" maxlength="255" formControlName="nmEmail">
+                        <input matInput type="email" maxlength="255" required
+                        formControlName="nmEmail" mask="A*@A*.SSS||A*@A*.SSS.SS">
                     </mat-form-field>
                     <mat-form-field *ngIf="isAdmin" fxFlex.xs="10" appearance="fill">
                         <mat-label>Permissão</mat-label>
